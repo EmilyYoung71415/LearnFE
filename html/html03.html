@@ -1,0 +1,60 @@
+<!-- 
+	优先级 代码执行生效的顺序
+		行间样式 > id选择器 > 类选择器 > 标签选择器 
+
+	
+
+
+
+
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			/* 1  inline-block对块和内联元素的影响
+			div, span{
+							height: 200px;
+							background-color: red;
+				display:inline-block; 
+						}  */
+
+	/* 		 2. 使块元素位于同一行 inline-block */
+			div{
+				width: 200px;
+				height: 200px;
+				background-color: green;
+				margin-right: 20px;
+				display: inline-block;
+				color:white;
+			} 
+
+		</style>
+	</head>
+	<body>
+		<!--1
+		 <div>div1</div>
+		<div>div2</div>
+		<hr />
+		<span>span1</span>
+		<span>span2</span>
+		 -->
+
+		<!-- 2 -->
+		<div>1</div>
+		<div>2</div>
+		<div>3</div> 
+		
+	
+
+		<!--
+			inline-block的特征
+			1、块元素能在一行上显示
+			2、内联元素支持宽高
+			3、没有宽度时，由内容撑开宽度
+		-->
+	</body>
+</html>

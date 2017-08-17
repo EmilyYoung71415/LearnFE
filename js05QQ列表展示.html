@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>QQ列表展示</title>
+	</head>
+	<style>
+		ul,h2{margin: 0;padding: 0;}
+		li{list-style: none;}
+		#list{width: 240px;border: 1px solid #222222; margin:  0 auto;}
+		#list .lis{}
+		#list h2{cursor: pointer;    height: 30px; line-height: 30px;text-indent: 20px;background: url(jsimg/ico1.gif) no-repeat 5px center #C6C6C6 ;color: #000000;}
+		#list .active{height: 30px; line-height: 30px;text-indent: 20px;background: url(jsimg/ico2.gif) no-repeat 5px center #B20E00 ;color: #fff;}
+		#list ul{display: none;}
+		#list ul li{line-height: 24px;border-bottom: 1px solid #333; text-indent: 24px;}
+		#list ul .hover{background: #333333;color: #fff;}
+		/*
+		ul , h2 { padding:0; margin:0; }
+		li { list-style:none; }
+		#list { width:240px; border:1px solid #333; margin:0 auto; }
+		#list .lis {}
+		#list h2 { height:30px; line-height:30px; text-indent:20px; background:url(img/ico1.gif) no-repeat 5px center #6FF; color:#000; }
+		#list .active { background:url(img/ico2.gif) no-repeat 5px center #FF9; color:#000; }
+		#list ul { display:none; }
+		#list ul li { line-height:24px; border-bottom:1px solid #333; text-indent:24px; }
+		#list ul .hover { background:#6FF; }
+		*/
+	</style>
+	<body>
+		<ul id="list">
+			<li class="lis">
+			  	<h2 >我的好友</h2>
+			    <ul>
+			    	<li >张三</li>
+			    	<li>张三</li>
+			    	<li>张三</li>
+			    	<li>张三</li>
+			    </ul>
+		  	</li>
+			<li class="lis">
+			  	<h2>企业好友</h2>
+			    <ul>
+			    	<li>李四</li>
+			    	<li>李四</li>
+			    	<li>李四</li>
+			    	<li>李四</li>
+			    	<li>李四</li>
+			    </ul>
+		 	 </li>
+			<li class="lis">
+			  	<h2>黑名单</h2>
+			    <ul>
+			    	<li>张小三</li>
+			    	<li>李小四</li>
+			    </ul>
+		  </li>
+		</ul>
+	</body>
+	<script>
+		window.onload = function(){
+			var oUl = document.getElementById('list');
+			var aH2 = oUl.getElementsByTagName('h2');
+			var aUl = oUl.getElementsByTagName('ul');
+			var aLi = null;
+			var arrLi =[];
+			
+			for( var i=0; i<aH2.length; i++ ){
+				aH2[i].index = i;
+				aH2[i].onclick = function (){
+					
+					// 展开收缩列表扩展板
+					for( var i=0; i<aH2.length; i++ ){
+						if( i != this.index ){
+							aUl[i].style.display = 'none';
+							aH2[i].className = '';
+						}
+					}
+
+					if( this.className == '' ){
+						aUl[this.index].style.display = 'block';
+						this.className = 'active';
+					} else {
+						aUl[this.index].style.display = 'none';
+						this.className = '';
+					}
+				};
+			}
+
+			//循环套循环找到最里层的li
+			for(var i = 0;i<aUl.length;i++){
+				aLi = aUl[i].getElementsByTagName("li");
+				for(var j = 0;j<aLi.length;j++){
+					//将找到的元素塞进新的数组里，直接对新数组进行操作；
+					arrLi.push(aLi[j]);
+				}
+			}
+			
+			//对arrli进行操作
+			for(var i = 0;i<arrLi.length;i++){
+				arrLi[i].onclick = function(){
+					//清除全部样式，为当前元素添加
+					//两个for之间隔了一个函数可以使用同一var 的i
+					for(var i = 0;i<arrLi.length;i++){
+						if(arrLi[i]!=this){
+							arrLi[i].className = "";
+						}
+						
+					}
+					//this.className = "hover";
+					if( this.className == '' ){
+						this.className = 'hover';
+					}else{
+						this.className = '';
+					}
+
+				}
+			}
+			
+			
+		}
+		
+		
+		
+	</script>
+	<!--
+		1.简单布局
+		2.active的css样式
+		3.点击一下为当前元素添加avtive
+			怎么判断？
+			点击的是h2发生变化的是 h2的同级元素ul
+			——>	获取相邻元素
+					索引值匹配
+		4.ul下面的li的点击高亮显示
+			——> 点击高亮显示当前状态
+					数组push方法 将值塞进新数组以操作新数组
+	
+		5. 展开收缩列表扩展板，选择当前上一个选择的自动关闭
+			if( i != this.index )
+		
+		
+    -->
+	
+	
+</html>

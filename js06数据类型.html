@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input value="18484" id="inp"/>
+	</body>
+	
+	<script>
+		var oInp = document.getElementById("inp");
+		var num1= 26595;
+		alert(!isNaN(oInp.value));
+		
+		
+		
+		
+	</script>
+	
+	<!--
+    	Number():
+    	1.boolean值：true为1，false为0；
+    	2.数字：简单的传出传入
+    	3.null：返回0
+    	4.undefined：NaN
+    	5.字符串：
+			  a. 如果字符串中只包含数字时，将其转换为十进制数值，忽略前导0
+			  b. 如果字符串中包含有效浮点格式，如“1.1”，将其转换为对应的浮点数字，忽略前导0
+			  c. 如果字符串中包含有效的十六进制格式，如“0xf”，将其转换为相同大小的十进制数值
+			  d. 如果字符串为空，将其转换为0
+			  e. 如果字符串中包含除上述格式之外的字符&*……%……￥%，则将其转换为NaN
+		
+		
+		parseInt():
+		1.parseInt()函数在转换字符串时，会忽略字符串前面的空格，知道找到第一个非空格字符。
+    	2.如果第一个字符不是数字或者负号，parseInt() 就会返回NaN，同样的，用parseInt() 转换空字符串也会返回NaN。
+    	3.parseInt()方法还有基模式，可以把二进制、八进制、十六进制或其他任何进制的字符串转换成整数。
+    		var num1 = parseInt("AF",16);　　　　　　 　　　　//175
+    		var num3 = parseInt("10",2);　　　　　　　 　　　//2　　(按照二进制解析)
+    	
+    	
+    	parseFloat():
+    	1. parseFloat() 只解析十进制，因此它没有第二个参数指定基数的用法
+    	
+    	
+    	parseInt() 和parseFloat() 的区别在于：
+		1.	parseFloat() 所解析的字符串中第一个小数点是有效的，而parseInt() 遇到小数点会停止解析，因为小数点并不是有效的数字字符。
+		2.	parseFloat() 始终会忽略前导的零，十六进制格式的字符串始终会被转换成0，而parseInt() 第二个参数可以设置基数，按照这个基数的进制来转换。
+    
+    	isNaN():
+    	是不是不是一个数字； true则不是数字，false 则是数字；
+    
+    
+    
+    -->
+	
+</html>

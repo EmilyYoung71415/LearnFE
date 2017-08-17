@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		//知识点：
+		/*
+			js作用域概念 ，预解析规则，表达式
+			全局与局部作用域解析，作用域链
+			调用局部数据，全局申明、for嵌套函数中i的取值
+		
+		
+		*/
+		
+		/*1*/
+		//alert(a);//undefined，因为浏览器先解析的var 、function,解析var a 但是不解析var a =后面后面的值。先预解析，再逐行读取代码
+		//var a= 7;
+	
+		/*2*/		
+		//alert(a);//报错，因为a没有定义
+		//a = 7;
+		
+		/*3*/
+		//alert(a);					//function a (){ alert(4); } 
+		//var a = 1;
+		//alert(a);					// 1  
+		//function a (){ alert(2); } 
+		//alert(a);					// 1
+		//var a = 3;		
+		//alert(a);					// 3
+		//function a (){ alert(4); }
+		//alert(a);					// 3
+		/*模拟浏览器
+		1>解析： var 、function、参数
+		 var a=1 ……;未定义 ×
+		 a()= function a (){ alert(2); } 遇到重名的，只留一个，留下了函数
+		 var a=3 ……;未定义x
+		 a()= function a (){ alert(4); } 两个函数，再遵循优先级，此处被保留√ 
+		2>逐行读代码
+		  第一个alert那里，a取解析器仓库的存储值——> function a (){ alert(4); } 
+		  第二个alert读到，a = 1;表达式修改预解析的值 ——> 1
+		  第三个alert 24行函数，因为函数并未被调用只是一个申明并不能改变表达式，所以此时a仍然为1
+		 同理下面的是3 、3 
+		 
+		
+		/*4*/
+		
+		
+		/*函数,自里而外（函数内部也是个域，同样会发生解析）*/
+		//var a = 1;
+		//function fn1(){
+		//	alert(a);						//undefined
+		//	var a = 2;
+		//}
+		//fn1();
+		//alert(a);							// 1
+		/*
+			1>先预解析： var a=……; 
+					  a= funtion fn1(){alert(a);var a = 2;}
+					  
+		
+			2>逐行读代码
+				a=1;
+				函数声明
+				函数调用 ——>进入函数内部，函数是个域，先预解析
+					var a ……
+			                     逐行读代码，此时有个全局的a=1，有个函数内部的局部a=undefined；
+			                                            而函数先内后外，所以alter（a）=undefined;
+			        
+		
+		/*5*/
+		
+		
+		/*复制上一块只是函数内部a前去掉var*/
+		//var a = 1;
+		//function fn1(){
+		//	alert(a);						// 1 全局变量战胜了局部变量
+		//	a = 2;//没有var申明
+		//}
+		//fn1();
+		//alert(a);							// 2 a表达式改变了1的值
+		
+		
+		/*6*/
+		
+		
+		/*fn1(a)含带了一个参数*/
+		//var a = 1;
+		//function fn1(a){//相当于  function fn1(var a)  即函数内部解析的时候得到var a
+		//	alert(a);						// undefined
+		//	a = 2;
+		//}
+		//fn1();
+		//alert(a);							// 1  此时有全局a=1；函数内部的a=2，它读全局的
+
+		/*7*/
+		
+		
+		/*
+		var a = 1;
+		function fn1(a){
+			alert(a);						// 1
+			a = 2;
+		}
+		fn1(a);
+		alert(a);							// 1
+		*/
+		
+		
+		
+		/*8获取函数内部的值*/
+		//法一:定义一个全局变量，给全局变量赋值
+		/*
+		var str;
+		function Ff(){
+			var a = "大鸡腿~";
+			//alert(a);
+			str = a;
+		}
+		Ff();		
+		alert(str);
+		//alert(a);a未定义
+		*/
+		//法二
+		/*
+		function fn2(){
+			var a = '9999999克拉钻石23456789';
+			fn3(a);
+		}
+		fn2();
+		
+		function fn3(a){
+			alert(a);
+		}
+		*/
+		
+		/*9*/
+		/*if、for是通透的不是域*/
+		
+		
+		/*10*/
+		/*for嵌套下的i取值*/
+		
+		/*
+		window.onload = function (){
+			var aBtn = document.getElementsByTagName('input');
+			for( var i=0; i<aBtn.length; i++ ){
+				aBtn[i].onclick = function (){
+					// alert( i );			// for里面onclick函数里不要直接使用i，除非闭包解决
+					for( var i=0; i<aBtn.length; i++ ){
+						aBtn[i].style.background = 'yellow';
+					}
+				};
+			}
+		};
+		*/
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
+		浏览器：
+		“JS解析器”
+			1）“找一些东西”	：var  function 参数
+			
+							a = ...
+									所有的变量，在正式运行代码之前，都提前赋了一个值：未定义
+							fn1 = function fn1(){ alert(2); }
+									所有的函数，在正式运行代码之前，都是整个函数块
+
+							JS 的预解析
+
+						遇到重名的：只留一个
+							变量和函数重名了，就只留下函数
+									
+			2）逐行解读代码：
+						表达式：= + - * / % ++ -- ! 参数……
+						
+						表达式可以修改预解析的值！
+			
+			
+
+		
+
+				
+		*/
+	</script>
+</html>

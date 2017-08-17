@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>切换图片</title>
+	</head>
+	<style>
+		#showview{
+			width: 240px;
+			height:240px;
+			margin: 0 auto;
+			position: relative;
+			border: 5px solid #9C9C9C;
+		}
+		img{
+			width: 240px;
+			height:240px;
+		}
+		a{
+			color: #EEEEEE;
+			font-size: 25px;
+			text-align: center;
+			line-height: 30px;
+			position: absolute;
+			top: 100px;
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			background: #333333;
+			cursor: pointer;
+		}
+		a:hover{
+			color: white;
+			background: #434343;
+		}
+		.prev{
+			left: 0px;
+		}
+		.next{
+			right: 0px;
+		}
+		span{
+			text-align: center;
+			color: white;
+			display: block;
+			width: 240px;
+			background: #333333;
+			position: absolute;
+		}
+		#text1{top: 0px;}
+		#text2{bottom: 0px;}
+		input{
+			margin-top: 10px;
+			margin-right:40px ;
+			cursor: pointer;
+		}
+	</style>
+	<body>
+		<div id="showview">
+			<span id="text1"></span>
+			<a class="prev" id="prev"><</a>
+			<img src="jsimg/1.png" id="pic"/>
+			<a class="next" id="next">></a>
+			<span id="text2"></span>
+			<input type="button" value="顺序播放" id="noloop"/>
+			<input type="button" value="循环播放" id="loop"/>
+			<p id="word"></p>
+		</div>
+	</body>
+	
+	<script>
+		var oPrev = document.getElementById("prev");
+		var oNext = document.getElementById("next");
+		var oPic = document.getElementById("pic");
+		var oText1 = document.getElementById("text1");
+		var oText2 = document.getElementById("text2");
+		var oNoloop = document.getElementById("noloop");
+		var oLoop = document.getElementById("loop");
+		var oWord = document.getElementById("word");
+		var onTurn = true;
+		//修改图片路径、文字显示，定义一个数组
+		var imgUrl = ['jsimg/1.png','jsimg/2.png','jsimg/3.png'];
+		var textArr = ["IT工作照","柠檬","小提琴"];
+		var num = 0;
+		function initAll(){
+			oText2.innerHTML = textArr[num];
+			oText1.innerHTML = num+1 +"/" + imgUrl.length;
+			oPic.src = imgUrl[num];
+			oWord.innerHTML = "根据喜爱选择模式";
+		}
+		initAll();
+		
+		oNoloop.onclick = function(){
+			oWord.innerHTML = "图片顺序切换";
+			onTurn = false;
+		}
+		oLoop.onclick = function(){
+			oWord.innerHTML = "图片循环切换";
+			onTurn = true;
+		}
+		
+		
+		oPrev.onclick = function(){
+			num--;
+			if(num==-1) {
+				if(onTurn)
+				{
+					num=imgUrl.length-1;
+				}
+				//alert("已经是第一张啦~~");
+				else{num=0;alert("对不起，这已经是第一一张啦~");}
+			}
+			initAll();
+		}
+		
+		oNext.onclick = function(){
+			num++;
+			if(num==imgUrl.length){
+				if(onTurn)
+				num =0;
+				//alert("已经是最后一张啦~~");
+				else{num=imgUrl.length-1;alert("对不起，这已经是最后一张啦~");}
+			}
+			initAll();
+		}
+		
+		
+
+	</script>
+	
+	<!--
+		定义开关true/false，判断控制
+		定义函数及调用函数
+		通过改图片src，切换图片
+		变量num统调所有的切换
+		span、p的内容修改，innerHTML
+		最后吐槽一下，else后面那个num=XX，我写成了num == 
+		晕，找了一下午。。。
+		
+	-->
+	
+</html>

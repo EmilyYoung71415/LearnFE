@@ -1,0 +1,61 @@
+/*
+
+css样式表    	
+    		外部样式表
+    		<link rel="stylesheet" type="text/csss" href="mystyle.css">
+    		内部样式表
+    		<style type="text/css"></style>
+    		内联样式 <p style=""></p>
+css样式   
+			css背景
+			background-attachment：fixed 背景图像是否固定或者随着页面的其余部分滚动。
+			background-color	设置元素的背景颜色。
+			background-image:url()	把图像设置为背景。
+			background-repeat:no-repeat/repeat-y; 背景是否重复
+			background-position：40% 50% （top left） 背景图像的起始位置。
+			
+			css文本
+			 	缩进文本
+				 	text-indent;也可使用负值，实现悬挂缩进特效。
+				 	p{text-indent:-5em;padding-left:5em;}
+	    			百分值即相对于缩进元素父元素的宽度。
+    			水平对齐
+    				text-alin：center;
+    			字间距
+    				word-spacing
+    			字母间隔
+    				letter-spacing
+    			字符转换
+    				text-transform处理文本大小写
+    				none 不改动
+    				uppercase 全文本变为大写
+    				lowercase 全文本变为小写
+    				capitalize 只对每个单词的首字母大写。
+    			文本装饰
+    				text-decoration 
+    				none
+    				underline 下划线
+    				overline  字上有上划线
+    				line-through 叉掉
+    				blink 文本闪烁
+    			处理空白符
+    				white-space：
+    				normal p下面的多个空格合为一个
+    				pre  空白符有多少个就如实表现出来
+    				nowrap  防止元素中的文本换行，除非使用了一个 br 元素
+    				pre-wrap: 显示空格符并换行
+    				pre-line：合并空格符并换行
+    	
+    		css表格
+    			border-collapse
+    				separate	默认值。边框会被分开。不会忽略 border-spacing 和 empty-cells 属性。
+					collapse	如果可能，边框会合并为一个单一的边框。会忽略 border-spacing 和 empty-cells 属性。
+					inherit	规定应该从父元素继承 border-collapse 属性的值。
+				文本对齐	
+					水平对齐 text-align center
+					垂直对齐 vertical-align ：top/bottom/ccenter
+					表格内边距 padding
+    			
+    			
+    	
+*/

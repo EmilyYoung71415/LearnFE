@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+<input type="text" name="" id="ins" value="123">
+</body>
+<script type="text/javascript">
+
+
+var oTs = document.getElementById("ins");
+
+var num = 0;
+		
+		for(var i= 0;i<10;i++){
+			num++;
+		}
+oTs.value = num;
+console.log(oTs.value);		
+	window.onload = function(){
+		Init();
+		
+		
+
+
+
+		//生成一排块
+		function Init(){
+			var len = 15;
+			var str ="";
+			var aDiv = document.getElementsByTagName("div");
+			for(var i=1;i<=len;i++){
+				str +="<div style='background: orange;width: 60px;height: 60px;position:absolute;top:350px;left:"+80*i+"px;'></div>";
+			}
+			document.body.innerHTML = str;
+		}
+
+		
+
+
+		
+		//console.log(arrNum);
+		
+	  /*	for(var i=0;i<len;i++){
+			aDiv[i].index=i;
+			aDiv[i].onmouseover =function(){
+				var pos = parseInt(getStyle(aDiv[this.index],"top"));
+				//console.log(pos);
+				/*clearInterval(timer);
+				timer = setInterval(function(){
+					//console.log(i);
+					aDiv[this.index].style.top = pos + arrNum[num]+"px";
+					num++;
+					if(num===arrNum.length){
+						clearInterval(timer);
+					}
+				},30)
+
+
+
+			}
+		}*/
+
+		//让div颤抖
+		function shakeDiv(obj,attr,endFn){
+			//准备一个特定数组 20，-20，18，-18，16，-16，……0
+			var arrNum = [];
+			for(var i=20;i>0;i-=2){
+				arrNum.push(i,-i);
+			}
+			arrNum.push(0);
+
+			var num = 0;
+			var pos = parseInt(getStyle(obj,attr));
+			clearInterval(obj.timerr);
+			obj.timerr = setInterval(function(){
+				obj.style[attr] = pos + arrNum[num] + "px";
+				num++;
+				if(num===arrNum.length){
+					clearInterval(obj.timerr);
+				}
+			},30)
+
+
+
+
+		}
+
+		//点击一排div掉落	
+		function dropDiv(){
+			document.onclick = function(){
+			clearInterval(timer);
+			timer = setInterval(function(){
+				doMove(aDiv[num],"top",20,500);
+				num++;
+				if(num===len){
+					clearInterval(timer);
+				}
+			},100);//中途缓存时间，掉第二个
+			}
+		}
+		
+
+		function doMove(obj,attr,step,target){
+			clearInterval(obj.timer);
+			obj.timer = setInterval(function(){
+				var speed = parseInt(getStyle(obj,attr)) + step;
+				if(speed>target){speed=target;}
+				obj.style[attr]=speed+"px";
+				if(speed==target){
+					clearInterval(obj.timer);
+				}
+
+			},10);//下降的速度
+		}
+
+		function getStyle(obj,attr){
+			return obj.currentStyle?obj.currentStyle[attr] : getComputedStyle( obj )[attr]; 
+		}
+	}
+
+
+</script>
+</html>

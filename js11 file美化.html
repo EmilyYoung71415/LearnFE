@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		#file{
+			width: 120px;
+			height: 34px;
+			border: 1px solid #00a5e0;
+    		background-color: #00a5e0;
+  			color: #fff;
+  			display: inline-block;
+		    line-height: 34px;
+		    font-size: 14px;
+		    text-align: center;
+		    cursor: pointer;
+		}
+		
+		
+	</style>
+	<body>
+		<label  for="xFile" id="file">上传文件</label>
+		<form><input type="file" id="xFile" style="position:absolute;clip:rect(0 0 0 0);"accept="image/png, image/jpeg, image/gif, image/jpg"/></form>
+
+
+		<input type="file" name="">
+	</body>
+	<script>
+		var oFile = document.getElementById("file");
+		oFile.onmouseover = function(){
+			this.style.backgroundColor = "rgb(0,180,245)";
+		}
+		oFile.onmouseout = function(){
+			this.style.backgroundColor = "#00a5e0";
+		}
+		
+		
+	</script>
+</html>

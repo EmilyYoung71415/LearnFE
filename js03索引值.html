@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			/*#pwd{
+				position: relative;
+			}*/
+			img{
+				width: 40px;
+				height: 40px;
+				/*position: absolute;
+				left: 180px;
+				top: 0px;*/
+				cursor: pointer;
+				margin-top: 5px;
+			}
+			input{
+				position: relative;
+				margin: 0 auto;
+				width: 150px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="password" value="65565565" id="pwd"/>
+		<!--<input type="button" id="btn" value="显示密码"/>-->
+		<img src="jsimg/eyeclose.png" />
+		
+	</body>
+	<script>
+		var oPwd=document.getElementById("pwd");
+		var oImg=document.getElementsByTagName("img")[0];
+		oImg.num=0;
+		oImg.onclick = function(){
+			//var arr=["隐藏密码","显示密码"];
+			var arrImg=["jsimg/eye.png","jsimg/eyeclose.png"];
+			//this.value=arr[this.num];
+			this.src=arrImg[this.num];
+			this.num++;
+			if(this.num==arrImg.length)
+			this.num=0;
+			console.log(this.src)
+			change(this);
+		}
+		function change(obj){
+			/*if(obj.value=="显示密码"){
+				oPwd.type="password";
+			}else{oPwd.type="text";}*/
+			//if(obj.src=='jsimg/eyeclose.png'){这样是错误的，因为路径是本地
+			if(obj.src=='http://127.0.0.1:8020/html-learning/jsimg/eyeclose.png'){
+				oPwd.type="password";console.log(oPwd.type);
+			}else{oPwd.type="text";}
+		}
+		
+		
+		
+			
+		}
+		
+	</script>
+	<!--
+    	写一个按钮可控制input框里的密码是显示状态或是隐藏状态：
+    	思路：
+    	按钮的点击事件控制input框里type是password或者text；
+    	难点：
+    	1.怎样一一对应，这一行的按钮控制的是这一行的input框，而不是所有的
+    	2.怎么实现一个按钮，有两个状态，用户不停的点击实现关与开的无限次切换；——>索引值匹配   1   
+    	3.按钮的开关与input状态的连接，关即是关，开即是开。——>判断当前value值再进行相应操作  2
+    	4.优化按钮，将文字形式的显示密码隐藏密码换成 图片的眼睛开关 3
+    	5.还有个问题就是没有解决匹配问题，现在只是通过id来确认的，如果是很多按钮呢，一行接一行的数据都需要单独控制是否显示完全
+    	
+    	
+    	
+    -->
+	
+	
+	
+	
+</html>

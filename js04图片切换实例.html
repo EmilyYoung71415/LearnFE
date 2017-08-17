@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片切换实例</title>
+	<style>
+		ul{margin: 0;padding: 0;}
+		li{list-style: none;}
+		body{background: #000000;}
+		#pic{width: 400px;height: 500px;position: relative;margin:0 auto;background: url(jsimg/loader_ico.gif) no-repeat center #fff;}
+		#pic img{width: 400px;height: 500px;}
+		#pic ul{position: absolute;top: 0;right: -50px;}
+		#pic li{width: 40px;height: 40px;margin-bottom: 4px;background-color: #4E5465;}
+		#pic .active{background: #FFC600;}
+		#pic p{bottom: 0;margin: 0;}
+		#pic span{top: 0;}
+		#pic p,#pic span{position: absolute;left:0;width: 400px;height: 30px;line-height: 30px;text-align: center;background: #222222;color: #F1F1F1;}
+	</style>
+	</head>
+	<body>
+		<div id="pic">
+			<img src=""/>
+			<span>数量正在加载中……</span>
+			<p>图片文字正在加载中……</p>
+			<ul>
+				<!--<li class="active"></li>
+				<li></li>
+				<li></li>-->
+			</ul>
+		</div>
+	</body>
+	<script>
+		window.onload=function(){
+			var oDiv = document.getElementById("pic");
+			var oImg = oDiv.getElementsByTagName("img")[0];
+			var oSpan = oDiv.getElementsByTagName("span")[0];
+			var oP = oDiv.getElementsByTagName("p")[0];
+			var oUl = oDiv.getElementsByTagName("ul")[0];
+			var aLi = oDiv.getElementsByTagName("li");
+			
+			var arrUrl = ['jsimg/1.png','jsimg/2.png','jsimg/3.png'];
+			var arrText = ['图片一','图片二','图片三'];
+			var num = 0;
+			var oldLi = null;
+			
+			for(var i=0;i<arrUrl.length;i++){
+				oUl.innerHTML +="<li></li>"
+			}
+			oldLi = aLi[num];//初始化的值赋给oldli
+			//初始化
+			function Init(){
+				oImg.src=arrUrl[num];
+				oP.innerHTML = arrText[num];
+				oSpan.innerHTML = 1+num+"/"+arrUrl.length;
+				//方法一 清空全部 当前添加
+				for(var i=0;i<arrUrl.length;i++){
+						aLi[i].className="";
+				}
+				aLi[num].className="active";
+			}
+			Init();
+			
+			//点击动态切换
+		/*	for(var i=0;i<arrUrl.length;i++){
+				aLi[i].index = i;//索引值
+				aLi[i].onclick = function(){
+					//alert(this.index);
+					num = this.index;
+					Init();
+				}
+			}*/
+			
+			//自动切换
+			var timer = null;
+			function Autoplay(){
+				timer = setInterval(function(){
+					num++;
+					num%=arrText.length;
+					Init();
+				},1000)
+			}
+			oDiv.onmouseover = function(){
+				clearInterval(timer);
+			}
+			oDiv.onmouseout = Autoplay;
+			setTimeout(Autoplay,3000);
+			//li active的实现
+			// 思路一：全部清空，当前添加
+			/*for( var i=0; i<aLi.length; i++ ){
+				aLi[i].className = '';
+			}
+			this.className = 'active';*/
+			//清空上一个，当前添加
+			/*oldLi.className="";
+			this.className="active";*/
+			
+		}
+			
+		
+		
+	</script>
+</html>

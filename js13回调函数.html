@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>回调函数</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+
+//代码示例2 异步函数
+// ====同步的加法
+/*function yibu(){
+	function Add(a, b){
+    return a+b;
+	}
+	Add(1, 2) // => 3
+
+	// ====异步的加法
+	function LazyAdd(a){
+	    return function(b){
+	        return a+b;
+	    }
+	}
+	var result = LazyAdd(1); 
+	/*=>
+	ƒ (b){
+	        return a+b;
+	    }
+	
+	// result等于一个匿名函数，实际是闭包
+	//我们的目的是做一个加法，result中保存了加法的一部分，即第一个参数和之后的运算规则，
+	//通过返回一个持有外层参数a的匿名函数构成的闭包保存至变量result中，这部是异步的关键。
+	//极端的情况var result = LazyAdd(1)(2);这种极端情况又不属于异步了，它和同步没有区别。
+
+	console.log(result);
+	// 实际生产中不会这么简单，它可能在等待一些条件成立，再去执行另外一半。
+
+	result = result(2) // => 3
+	console.log(result);
+}*/
+
+
+//代码示例3 回调函数
+//注意还是那个Add，精髓也在这里，随后说到
+function Add(a, b){
+    return a+b;
+}
+//LazyAdd改变了，多了一个参数cb
+function LazyAdd(a, cb){
+    return function(b){
+        cb(a, b);
+    }
+}
+//将Add传给形参cb
+var result = LazyAdd(1, Add)
+console.log(result);//ƒ (b){cb(a, b);}
+
+// doing something else
+result = result(2); // => 3
+console.log(result);
+</script>
+</html>

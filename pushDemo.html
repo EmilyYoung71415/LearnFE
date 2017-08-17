@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>推送模板</title>
+	<link rel="stylesheet" href="">
+	<style type="text/css" media="screen">
+		.box{width: 80%;height:100%;border:1px solid #d4d6c8;margin:0 auto;}
+		h2{text-align: center;}
+		.content,.upload,.tips,.pushobject,.pushtime{margin-left: 5%;margin-top: 40px;margin-right: 5%;}
+		#file{position: absolute;clip: rect(0,0,0,0);}
+		.upload label{
+			width: 80px;
+			height: 34px;
+			border: 1px solid #00a5e0;
+    		background-color: #00a5e0;
+  			color: #fff;
+  			display: inline-block;
+		    line-height: 34px;
+		    font-size: 14px;
+		    text-align: center;
+		    cursor: pointer;
+		    z-index: 2;
+		    border-radius: 4px;
+		}
+		#text{
+			height: 30px;
+			background: #e9e9e5;
+			color: black;
+			font-weight: bold;
+			border-radius: 4px;
+			text-align: center;
+		}
+		/*标签*/
+		.blockcolors{width:auto;height:26px;color:#fff;background:orange;line-height: 26px;text-align: center;border-radius: 4px;font-size:1.2em;margin-left: 10px;cursor: pointer;display: inline-block;margin-top: 20px;padding: 10px;}
+		/*水平线加字分割*/
+		.title { position: relative; z-index: 2; font-size: 16px; line-height: 24px; text-align: center; color: #999; overflow: hidden; }
+		.title .caption { position: relative; display: inline-block; font-size: 14px;font-weight: bold;color: #3a3a3a;}
+		.title .caption .line { position: absolute; top: 11px; width: 600px; height: 1px; background-color: #ddd; }
+		.title .caption .line-l { right: 100%; margin-right: 15px; }
+		.title .caption .line-r { left: 100%; margin-left: 15px; }
+		/*文本框*/
+		textarea{width: 100%;margin-top: 20px;min-height:200px; }
+		.pushtitle input{width: 100%;height: 30px;}	
+		
+		#button{background:#00a5e0;color:#fff;display:inline-block;width: 30%;height: 36px;margin-left: 35%;text-align: center;line-height: 36px;font-size:16px;margin-top:50px;border-radius: 4px;margin-bottom: 20px;cursor: pointer;}
+		/*@弹出框*/
+		#sel{width: 100%;}
+	</style>
+</head>
+<body >
+	<h2>模板编辑</h2>
+	<div class="box">
+
+		<div class= "upload">
+			<div class="title">
+	   		 <span class="caption">
+	   		 	<span class="line line-l"></span>上传文件
+	   		 	<span class="line line-r"></span>
+	   		 </span>
+			</div>
+			<p>上传excel文件:</p>
+			<form action="pushtemplate_submit" method="get" accept-charset="utf-8">
+				<span>附件：</span>
+				<input type="text" id="text" disabled="disabled" >
+				<input type="file" id="file"  accept=".xlsx" >
+				<label for="file">上传文件</label>
+			</form>
+		</div>
+		<div class="tips">
+			<div class="title">
+	   			 <span class="caption">
+	   		 		<span class="line line-l"></span>变量标签
+	   		 		<span class="line line-r"></span>
+	   			 </span>
+			</div>
+			<div id="blocks"></div>
+		</div>
+		<div class="content">
+			<div class="title">
+	   		 <span class="caption">
+	   		 	<span class="line line-l"></span>内容
+	   		 	<span class="line line-r"></span>
+	   		 </span>
+			</div>
+			<div class="pushtitle">
+				<p>标题</p>
+				<input type="text" name="title" >
+			</div>
+			<div class="textarea">
+				<p>正文内容</p>
+				<textarea id="textarea" placeholder="请在这里输入推送内容" ></textarea>
+			</div>
+			<form name="newform">
+				<div id="myselect">
+		            <select name="myselect" style="display: block;" size=5 id="sel">
+		            </select>
+				</div>
+			</form>
+		</div>
+		<div class="pushobject">
+			<div class="title">
+	   		 <span class="caption">
+	   		 	<span class="line line-l"></span>推送对象
+	   		 	<span class="line line-r"></span>
+	   		 </span>
+			</div>
+			<div class="pushplat">
+				<p>推送平台(必选)</p>
+				<select name="platform">
+					<option value="1">ios</option>
+					<option value="2">android</option>
+					<option value="2">android和ios</option>
+
+				</select>
+			</div>
+		</div>
+		
+		<div class="pushtime">
+			<div class="title">
+	   		 <span class="caption">
+	   		 	<span class="line line-l"></span>发生时间
+	   		 	<span class="line line-r"></span>
+	   		 </span>
+			</div>
+			<div class="time">
+				<p>推送时间:</p>
+				<select name="pushtime">
+					<option value="1">立即</option>
+					<option value="2">定时</option>
+				</select>
+			</div>
+		</div>
+			 <span  id="button">推送消息</span>
+	</div>
+</body>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/xlsx.core.min.js"></script>
+<script type="text/javascript">
+		var oFile = document.getElementById("file");
+		var oText = document.getElementById("text");
+		var oTextarea = document.getElementById("textarea");
+		var oButton = document.getElementById("button");
+		var oBlock = document.getElementById("blocks");
+		var oSel = document.getElementById("sel");
+		var arrTips = [];
+
+		getExcel();
+
+		function getExcel(){
+			oFile.onchange = function(e){
+	            var files = e.target.files;
+	            var fileReader = new FileReader();
+	            fileReader.onload = function(ev) {
+	                try {
+	                    var data = ev.target.result,
+	                        workbook = XLSX.read(data, {
+	                            type: 'binary'
+	                        }), // 以二进制流方式读取得到整份excel表格对象
+	                        persons = []; // 存储获取到的数据
+	                } catch (e) {
+	                    console.log('文件类型不正确');
+	                    return;
+	                }
+	 
+	                var fromTo = '';
+	                // 遍历每张表读取
+	                for (var sheet in workbook.Sheets) {
+	                    if (workbook.Sheets.hasOwnProperty(sheet)) {
+	                        fromTo = workbook.Sheets[sheet]['!ref'];
+	                        persons = persons.concat(XLSX.utils.get_formulae(workbook.Sheets[sheet]));
+	                        break; 
+	                    }
+	                }
+	 			 	
+	 			 	var len = workbook.Strings.length;
+	                for(var i=0;i<len;i++){
+	                	arrTips.push(persons[i].substring(4));
+
+	                }
+	                var str="";//获取变量标签
+	                for (var j = 0; j<arrTips.length; j++){
+	          			str+="<div class='blockcolors'>"+arrTips[j]+"</div>";
+	          		}
+	          		oBlock.innerHTML= str;
+	          		//动态加载option
+				 	for (var k=0;k<=arrTips.length;k++) { 
+			        	oSel.options.add(new Option(arrTips[k],k));
+			        	oSel.options[0].selected=true;
+			        }
+
+	            };
+	            // 以二进制方式打开文件
+	            fileReader.readAsBinaryString(files[0]);
+	            oText.value  = oFile.value;
+	            console.log(oText.value);
+	            //清空
+	            arrTips =[];
+	            $("#sel").empty();
+	            str="";
+	        };
+		}
+		
+		//监听键盘艾特事件
+		/*oTextarea.onkeyup=function(e){   
+		var keyNum=window.event ? e.keyCode :e.which;  //获取被按下的键值 
+			if(keyNum==50&&e.shiftKey){ 
+				alert(oTextarea.value);
+				oSel.style.display="block";
+				
+				
+
+			} 
+	  	}*/
+		
+		oSel.onchange = function(){
+			textarea.value +=this.options[this.options.selectedIndex].text;
+		}
+		
+		//提交
+		oButton.onclick = function(){
+			alert(oTextarea.value);
+		}
+</script>
+<!--
+	1.模糊查询
+	2.sel下面键盘能控制（现在只能鼠标），
+
+
+-->
+
+</html>

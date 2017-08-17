@@ -1,0 +1,47 @@
+/*
+css框模型 
+		 元素框处理元素内容、内边距、边框 和 外边距
+		element (长宽)
+		padding内边距
+		margin 外边距
+		border
+
+css定位
+		使用 display 属性改变生成的框的类型
+		diplay
+			none	此元素不会被显示。
+			block	此元素将显示为块级元素，此元素前后会带有换行符。
+			inline	默认。此元素会被显示为内联元素，元素前后没有换行符。
+			inline-block	行内块元素。（CSS2.1 新增的值）
+		
+		position
+			absolute 生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。
+			fixed 	生成绝对定位的元素，相对于浏览器窗口进行定位。
+			relative 相对定位
+			static 没有定位
+			inherit 继承
+		浮动和clear属性
+			
+	
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ * */

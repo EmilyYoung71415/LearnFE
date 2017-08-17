@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		input{
+			cursor: pointer;
+		}
+		li{cursor: pointer;  list-style: none;width:100px; height:150px;float:left;margin-right:30px; background:#f1f1f1;  position:relative; z-index:1; }
+		div { width:80px; height:200px; background:red; position:absolute; top:75px; left:10px; display:none; }
+		
+	
+	
+	</style>
+	<body>
+		
+		
+		<ul>
+			<li>
+				<div >
+					
+				</div>
+			</li>
+			<li>
+				<div >
+					
+				</div>
+			</li>
+			<li>
+				<div >
+					
+				</div>
+			</li>
+		</ul>
+		<input type="password" value="2549" onfocus="showSecret(this)" onBlur="hideSecret(this)">
+		<input type="password" value="26489565" onfocus="showSecret(this)" onBlur="hideSecret(this)">
+
+		<input type="button" value="按钮1" name="button" />
+		<input type="button" value="按钮2" name="button" />
+		<input type="button" value="按钮3" name="button" />
+
+	</body>
+	<script>
+		function hideSecret(obj){
+			obj.type="password";
+		}
+		function showSecret(obj){
+			obj.type="text";
+		}
+		/* this	: 这个
+		// this： 指的是调用 当前 方法（函数）的那个对象
+		
+		//function fn1(){
+		//	 this
+		// }
+		// (window.)fn1();			this => window
+		 	oDiv.onclick = fn1;			this => oDiv*/
+		
+		/*
+		 * 
+		 *  oDiv.onclick =function(){
+		 * 		this;   this->oDiv
+		 * }
+			oDiv.onclick = function (){
+				fn1();					fn1() 里的this => window
+			};
+			
+			<div onclick="    this     fn1();"></div>     this->div;    fn1()里的 this 指的是 window
+		
+		*/
+		/*
+		 	this的深度理解
+		 	1.全局上下文：this为widow
+		 		console.log(this);
+				console.log(this==window);
+		 	 	注意：如果标准为严格模式下，this为undifined
+		 	 	function test(){
+		 		"use strict";
+		 		console.log(this);//undifined
+		 		}
+		 		test();
+		 	2.函数上下文
+		 		函数中的this值与函数怎么被调用有关;
+		 		
+		 */
+		 	
+		//var aBtn =document.getElementsByName("button");
+		
+		/*1. 直接匿名函数里面调用this;
+		   for(var i=0;i<aBtn.length;i++){
+			aBtn[i].onclick = function(){
+				this.style.background = "yellow";//this 指的是abtn[i] 当前元素
+			}
+		}*/
+		
+		/*2. 函数调用函数
+		 被调用函数那里的this是widow，解决办法，将匿名函数里的this暂存，在被调用函数那里当this使用
+		var that = null;
+		for(var i=0;i<aBtn.length;i++){
+			aBtn[i].onclick = function(){
+				that=this;
+				changecolor();
+			}
+		}
+		 
+		 function changecolor(){
+		 	this-->window
+		 	that.style.backgroundColor="blue";
+		 }
+			
+		*/
+		
+		/*3.直接调用函数 this->aBtn[i]对象
+		  
+		for(var i=0;i<aBtn.length;i++){
+			aBtn[i].onclick = changecolor;//注意不加括号，没返回值
+		}
+		function changecolor(){
+			this.style.background="green";
+		}
+		 
+		*/
+		 
+		/* 4.this应用*/
+		/*var that = null;
+		 var aLi = document.getElementsByTagName("li");
+		 for (var i=0;i<aLi.length;i++){
+		 	aLi[i].onmouseover = function(){
+		 		that = this;
+		 		changecolor();
+		 	}
+		 	aLi[i].onmouseout = function(){
+		 		resetcolor();
+		 	}
+		 }
+		 
+		 function changecolor(){
+		 	that.style.background="orange";
+		 	that.getElementsByTagName("div")[0].style.display = "block";//that 是li，li下面的div[0]元素
+		 }
+		 
+		 function resetcolor(){
+		 	that.style.background = "#f1f1f1";
+		 	that.getElementsByTagName("div")[0].style.display = "none";
+		 }*/
+
+		 var abtn = document.getElementsByName("button");
+		 var Arr =['a','b','c'];
+		 for(var i=0;i<abtn.length;i++){
+		 		abtn[i].num=0;
+		 		abtn[i].onclick = function(){
+		 			this.value = Arr[this.num];
+		 			this.num++;
+		 			if(this.num==abtn.length)
+		 			this.num=0;
+		 		}
+
+		 }
+	</script>
+	
+	
+	
+	
+</html>

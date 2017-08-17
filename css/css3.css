@@ -1,0 +1,51 @@
+/*
+1.css3 边框
+border-radius
+		border-radius:25px 20px 10px 5px ;上 右 下 左
+
+
+box-shadow：50px 50px 50px 5px black inset;
+ 水平阴影位置、垂直阴影位置、模糊距离、阴影的尺寸、颜色、将外部阴影 (outset) 改为内部阴影
+ 
+
+border-image：
+border-image:url(/i/border.png) 30 30 stretch;
+路径、图片边框向内偏移、图片边框的宽度、图像边框是否应平铺(repeated)、铺满(rounded)或拉伸(stretched)
+
+2.css3 背景
+规定背景图片的尺寸。
+background-size:100px 100px;
+	宽度、高度（也可以父元素的百分比设置）
+	cover：背景图像完全覆盖背景区域 足够大
+	contain：使其宽度和高度完全适应内容区域
+
+
+规定背景的绘制区域。	
+background-clip: border-box|padding-box|content-box;
+border-box	背景被裁剪到边框盒。	
+padding-box	背景被裁剪到内边距框。
+content-box	背景被裁剪到内容框。	
+
+
+规定背景图片的定位区域。
+background-origin：padding-box|border-box|content-box;
+padding-box	背景图像相对于内边距框来定位。	
+border-box	背景图像相对于边框盒来定位。	
+content-box	背景图像相对于内容框来定位。	
+
+
+3.css3文本效果
+text-shadow: 5px 5px 5px #FF0000;水平阴影、垂直阴影、模糊距离、颜色
+自动换行
+word-wrap：normal|break-word
+normal:只在允许的断字点换行|break-word:在长单词或 URL 地址内部进行换行(会对单词进行拆分)
+
+文本溢出处理：
+text-overflow: clip|ellipsis;
+clip	修剪文本。	测试
+ellipsis	显示省略符号来代表被修剪的文本。	
+
+
+
+
+ */

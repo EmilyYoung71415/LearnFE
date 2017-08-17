@@ -1,0 +1,128 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<style>
+	li{list-style: none;}	
+	#lis{width: 80px;height: 30px;position: relative;}
+	#lis a{display: block;line-height: 30px;text-align: center;text-decoration: none;color: #000000;background: #2489C5;}
+	ul ul{  display: none;  padding: 0;margin:0;width: 140px;border:1px solid #2489C5;position: absolute;top: 30px;left: 0px;background:#2489C5 ;}
+	ul ul li{ text-align: center;line-height: 30px;color: #000000; cursor: pointer;}
+
+	#demo2{margin-top: 200px;margin-left: 50px;}
+
+</style>
+<script>
+	window.onload = function(){
+		var a =document.getElementById("link");
+		var ul = document.getElementById("ull");
+		var li = document.getElementById("lis");
+		
+		
+		
+		li.onmouseover = function(){
+			ul.style.display = "block";
+			a.style.opacity = 0.9;
+			a.style.color = "#fff";
+		}
+		
+		li.onmouseout = function(){
+			ul.style.display ="none";
+			a.style.opacity = 1;
+			a.style.color = "#000000";
+		}
+		
+		
+
+	
+	}
+	
+	function overChange(a){
+		a.style.opacity = 0.9;
+		a.style.color = "#fff";
+	}
+	function outChange(b){
+		b.style.opacity = 1;
+		b.style.color = "#000000";
+	}
+	
+	
+
+</script>
+</head>
+
+<body>
+
+<ul>
+	<li id="lis">
+		<a id="link" href="#">微博</a>
+		<ul id="ull">
+			<li onmouseover="overChange(this)" onmouseout="outChange(this)">私信</li>
+			<li onmouseover="overChange(this)" onmouseout="outChange(this)">评论</li>
+			<li onmouseover="overChange(this)" onmouseout="outChange(this)">@我</li>
+		</ul>
+		
+	</li>
+</ul>
+
+<div id="demo2">
+	<input type="button" id="showbtn" value="显示" />
+	<input type="button" id="hidebtn" value="隐藏" />
+	<strong id="text"> 点击这里也可以显示</strong>
+</div>
+
+
+<script>
+/*知识点
+ 
+document.getElementById();
+a.onclick = function(){}
+a.onmouseover = function(){}
+a.onmouseoout =function(){}
+
+//带参函数
+a.onmouseout  = changecolor(b);//形参
+function changeColor(a){}
+
+
+//改变字大小
+oBtn2.onclick = function (){
+		num += 2;
+		// JS 不允许出现“-“
+		oP.style.fontSize = num + 'px';
+		
+};
+
+//js引用class，元素增加某class属性
+.red{
+	color:red;
+}
+
+<p id="tag"></p>
+
+var oP=document.getElementBy("tag");
+oP.onclick = function(){
+	oP.className="red";本无class，设定className
+}
+
+//修改浮动
+IE（styleFloat）
+非IE（cssFloat）
+oDiv.style.styleFloat = 'right';		// IE
+oDiv.style.cssFloat = 'left';			// 非IE
+
+
+
+
+
+
+
+
+*/
+</script>
+
+</body>
+</html>
