@@ -7,91 +7,59 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
-<input type="text" name="" id="ins" value="123">
 </body>
 <script type="text/javascript">
-
-
-var oTs = document.getElementById("ins");
-
-var num = 0;
-		
-		for(var i= 0;i<10;i++){
-			num++;
-		}
-oTs.value = num;
-console.log(oTs.value);		
-	window.onload = function(){
+		var len = 15;
+		var aDiv = document.getElementsByTagName("div");
 		Init();
+
 		
-		
-
-
-
 		//生成一排块
 		function Init(){
-			var len = 15;
 			var str ="";
-			var aDiv = document.getElementsByTagName("div");
 			for(var i=1;i<=len;i++){
-				str +="<div style='background: orange;width: 60px;height: 60px;position:absolute;top:350px;left:"+80*i+"px;'></div>";
+				str +="<div style='background: orange;width: 60px;height: 60px;position:absolute;top:350px;left:"+100*i+"px;'></div>";
 			}
 			document.body.innerHTML = str;
-		}
-
-		
-
-
-		
-		//console.log(arrNum);
-		
-	  /*	for(var i=0;i<len;i++){
-			aDiv[i].index=i;
-			aDiv[i].onmouseover =function(){
-				var pos = parseInt(getStyle(aDiv[this.index],"top"));
-				//console.log(pos);
-				/*clearInterval(timer);
-				timer = setInterval(function(){
-					//console.log(i);
-					aDiv[this.index].style.top = pos + arrNum[num]+"px";
-					num++;
-					if(num===arrNum.length){
-						clearInterval(timer);
-					}
-				},30)
-
-
-
+			//dropDiv();
+			for(var j =0;j<len;j++){
+				aDiv[j].index=j;
+				aDiv[j].onclick = function(){
+					var _this =this;
+					shakeDiv(_this,"top",function(){
+						shakeDiv(_this,"left");
+					})
+				}
 			}
-		}*/
+
+		}
 
 		//让div颤抖
 		function shakeDiv(obj,attr,endFn){
-			//准备一个特定数组 20，-20，18，-18，16，-16，……0
-			var arrNum = [];
+			var num =0;
+			var timerr = null;
+			var arrNum = [];//准备一个特定数组 20，-20，18，-18，16，-16，……0
 			for(var i=20;i>0;i-=2){
 				arrNum.push(i,-i);
 			}
 			arrNum.push(0);
-
-			var num = 0;
-			var pos = parseInt(getStyle(obj,attr));
+			var pos = parseInt(getStyle(obj,attr));//有隐患  建立一个储存，可以存放变量
 			clearInterval(obj.timerr);
 			obj.timerr = setInterval(function(){
 				obj.style[attr] = pos + arrNum[num] + "px";
 				num++;
+				//console.log(pos);
 				if(num===arrNum.length){
 					clearInterval(obj.timerr);
+					endFn&&endFn();//回调函数抖完之后再做
 				}
 			},30)
-
-
-
-
 		}
 
 		//点击一排div掉落	
 		function dropDiv(){
+			var num = 0;
+			var timer = null;
 			document.onclick = function(){
 			clearInterval(timer);
 			timer = setInterval(function(){
@@ -121,7 +89,7 @@ console.log(oTs.value);
 		function getStyle(obj,attr){
 			return obj.currentStyle?obj.currentStyle[attr] : getComputedStyle( obj )[attr]; 
 		}
-	}
+	
 
 
 </script>
