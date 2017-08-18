@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<p style="font-size: 48px;" id="number"></p>
+	<img src="jsimg/Date/0.JPG">
+	<img src="jsimg/Date/0.JPG">
+	<img src="jsimg/Date/colon.JPG">
+	<img src="jsimg/Date/0.JPG">
+	<img src="jsimg/Date/0.JPG">
+	<img src="jsimg/Date/colon.JPG">
+	<img src="jsimg/Date/0.JPG">
+	<img src="jsimg/Date/0.JPG">
+</body>
+<script type="text/javascript">
+	//显现时间 年月日时分秒
+	/*window.onload = function(){
+		setInterval(getCurrentTime,1000);
+		function getCurrentTime(){
+			var  myTime = new Date();//object
+			var iYear = myTime.getFullYear();//年
+			var iMonth = myTime.getMonth()+1;//月，以0开始
+			var iDate = myTime.getDate();//日
+			var iWeek = myTime.getDay();//星期，是数字
+			var iHours = myTime.getHours();//小时
+			var iMin = myTime.getMinutes();//分
+			var iSec = myTime.getSeconds();//秒
+			var str="";
+			str = iYear+ '年' +iMonth+'月'+iDate+'日 '+iWeek+' '+ toTwo(iHours)+' : '+ toTwo(iMin)+' : '+ toTwo(iSec);
+			document.body.innerHTML = str;
+		}
+
+		function toTwo(obj){
+			return obj<10 ? "0"+obj:obj;
+		}
+	}*/
+
+	//图片时间
+	window.onload = function(){
+		var oP = document.getElementById("number");
+		var aImg =document.getElementsByTagName("img");
+		
+		setInterval(getcurrentTime,1000);
+		getcurrentTime();
+
+		function getcurrentTime(){
+			var myTime = new Date();
+			var iHours = myTime.getHours();
+			var iMin = myTime.getMinutes();
+			var iSec =myTime.getSeconds();
+			var str  = toTwo(iHours) +"0" + toTwo(iMin)+ "0" + toTwo(iSec);
+			oP.innerHTML = str;
+
+			for(var i=0;i<str.length;i++){
+				aImg[i].src = 'jsimg/Date/' + str.charAt(i) + '.JPG';
+				//将i相对应，str的第i个数字对应数字i，图片命名于数字对应，str是变化的
+				aImg[2].src = "jsimg/Date/colon.JPG";
+				aImg[5].src = "jsimg/Date/colon.JPG";
+			}
+
+
+			
+		}
+		
+		function toTwo(obj){
+			return obj<10?"0"+obj:""+obj;//一个引号是多么的重要!
+		}
+
+
+	}
+/*window.onload = function () {
+
+	var oBody = document.body;
+	var oP = document.getElementById('number');
+	var aImg = document.getElementsByTagName('img');
+	
+	setInterval( fnTime, 1000 );
+	
+	fnTime ();
+	
+	function fnTime () {
+	
+		var myTime = new Date();
+		var iHours = myTime.getHours();
+		var iMin = myTime.getMinutes();
+		var iSec = myTime.getSeconds();
+		var str = toTwo(iHours)+toTwo(iMin)+toTwo(iSec);
+		
+		// str = '214204';
+		
+		oP.innerHTML = str;
+		
+		// str.charAt(5)
+		// aImg[4].src = 'img/' + str.charAt(4) + '.JPG';
+		// aImg[5].src = 'img/' + str.charAt(5) + '.JPG';
+		for ( var i=0; i<str.length; i++ ) {
+			aImg[i].src = 'img/' + str.charAt(i) + '.JPG';
+		}
+	
+	}
+};
+function toTwo(obj){
+			return obj<10?"0"+obj:""+obj;
+		}
+	 */
+
+
+
+
+
+</script>
+</html>
