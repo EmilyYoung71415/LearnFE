@@ -5,8 +5,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<link rel="stylesheet" href="">
+
+	<style type="text/css">
+		
+		input{width: 300px;height: 50px;font-size: 20px;line-height: 50px;}
+	</style>
 </head>
+
 <body>
+	<h2>图片时间</h2>
 	<p style="font-size: 48px;" id="number"></p>
 	<img src="jsimg/Date/0.JPG">
 	<img src="jsimg/Date/0.JPG">
@@ -16,6 +23,10 @@
 	<img src="jsimg/Date/colon.JPG">
 	<img src="jsimg/Date/0.JPG">
 	<img src="jsimg/Date/0.JPG">
+	<h2>倒计时</h2>
+	距离：<input type="text" value= "August 19,2017 10:30:0">
+	还剩下：<input type="text">
+	<input type="button" value="开始倒计时吧~">
 </body>
 <script type="text/javascript">
 	//显现时间 年月日时分秒
@@ -41,7 +52,7 @@
 	}*/
 
 	//图片时间
-	window.onload = function(){
+	/*window.onload = function(){
 		var oP = document.getElementById("number");
 		var aImg =document.getElementsByTagName("img");
 		
@@ -62,9 +73,6 @@
 				aImg[2].src = "jsimg/Date/colon.JPG";
 				aImg[5].src = "jsimg/Date/colon.JPG";
 			}
-
-
-			
 		}
 		
 		function toTwo(obj){
@@ -72,46 +80,47 @@
 		}
 
 
-	}
-/*window.onload = function () {
+	}*/
 
-	var oBody = document.body;
-	var oP = document.getElementById('number');
-	var aImg = document.getElementsByTagName('img');
-	
-	setInterval( fnTime, 1000 );
-	
-	fnTime ();
-	
-	function fnTime () {
-	
-		var myTime = new Date();
-		var iHours = myTime.getHours();
-		var iMin = myTime.getMinutes();
-		var iSec = myTime.getSeconds();
-		var str = toTwo(iHours)+toTwo(iMin)+toTwo(iSec);
-		
-		// str = '214204';
-		
-		oP.innerHTML = str;
-		
-		// str.charAt(5)
-		// aImg[4].src = 'img/' + str.charAt(4) + '.JPG';
-		// aImg[5].src = 'img/' + str.charAt(5) + '.JPG';
-		for ( var i=0; i<str.length; i++ ) {
-			aImg[i].src = 'img/' + str.charAt(i) + '.JPG';
+	//倒计时例子
+	window.onload = function(){
+		var iNew = null;
+		var iNow = null;
+		var interval = 0;
+		var str ="";
+		var time = null;
+		var aInput =document.getElementsByTagName("input");
+		aInput[2].onclick = function(){
+			iNew = new Date(aInput[0].value);
+			clearInterval(time);	
+			time = setInterval(function(){
+				iNow = new Date();
+				interval = iNew - iNow;//毫秒为单位，转换为秒/1000，向下取整
+				var sec = Math.floor((iNew-iNow)/1000);//秒数
+				str = Math.floor(sec/864000) + "天" + Math.floor(sec%864000/3600) +"时" +Math.floor(sec%86400%3600/60) + "分" +Math.floor(sec%60) + "秒";
+				if(interval<=0){
+					str = 0+"天" + 0+"时" +0+ "分" +0+ "秒";
+					//console.log(str);
+					clearInterval(time);
+				}
+				aInput[1].value = str;
+			},1000)
 		}
-	
 	}
-};
-function toTwo(obj){
-			return obj<10?"0"+obj:""+obj;
-		}
-	 */
-
 
 
 
 
 </script>
+<!--
+
+// 天：Math.floor(t/86400)
+// 时：Math.floor(t%86400/3600)
+// 分：Math.floor(t%86400%3600/60)
+// 秒：t%60
+
+日期对象 new Date()
+Math 对象
+
+-->
 </html>

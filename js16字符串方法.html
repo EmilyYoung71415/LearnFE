@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style type="text/css">
+		div{
+			width: 200px;
+			height: 150px;
+			border: 1px solid red;
+			background: #fff;
+
+			font-size: 18px;
+			padding: 5px;/*上右下左*/			
+		}
+		a{text-decoration: none;color:#ddd;}
+		a:hover{color: lightblue;}
+		#demo3{
+			width: 300px;
+			height: 300px;
+		}
+		textarea{width: 300px;height: 200px;}
+		#demo3 span{width: auto;height: 15px;margin-left: 2px;color: #fff;padding:2px;;line-height: 15px;margin-top: 25px}
+	</style>
+</head>
+<body>
+	<hr>
+	<input type="text" >
+	<input type="button" value="判断一下">
+	<hr>
+	<div>
+		<P><span>我们是一大段文字，一大段文字，文字，顽强生存，不能消灭我们，不能收缩我们哈哈哈哈哈哈哈哈哈：）</span>……<a href="#">>>收缩</a></P>
+	</div>
+	<hr>
+	<div id="demo3">
+		<div ></div>
+		<input type="text">
+		<input type="button" value="按钮">
+	</div>
+</body>
+<script type="text/javascript">
+	/*-------------------1.字符串获取类 string-----------------------------*/
+	/*var aInput = document.getElementsByTagName("input");
+	aInput[1].onclick = function(){
+		/*if(isNaN(aInput[0].value)){
+			console.log("不是一个数字");
+			//isNaN 包含了空格，即使输入含有空格也判为数字
+		}
+		//数字unicode码对应48-57
+		var obj = aInput[0].value;
+		if(isNum(obj)){
+			alert("恭喜你输入完全正确*_*");
+		}else{
+			alert("输入有误@@")
+		}
+	}
+
+
+	function isNum(str){
+		var n="";
+		for(var i=0;i<str.length;i++){
+			n=str.charCodeAt(i);
+			if(n<48||n>57) return false;
+				//alert("输入有误@@");
+		}
+		return true;
+	}*/
+	/*------------------2.Indexof---------------------------------*/
+	/*var str ="一颗两颗三颗四颗五颗一颗";
+	var s="一颗";
+	var i=0;
+	while(str.indexOf(s,i)!=-1){
+		alert(str.indexOf(s,i));
+		i = str.indexOf(s,i)+s.length;//检测特定字符的出现位置;
+	}*/
+	/*-------------------3.substring--------------------------------------*/
+	/*
+	*subtring*
+	var str ="一颗两颗三颗四颗五颗一颗";
+	alert(str.substring(2));//切掉前2个字符;
+	alert(str.substring(6,2));//提取字符串中两个指定的索引号之间的字符。
+	alert(str.substring(-3,5));//可以检测两个数字，熟大熟小，负数自动视为0
+	*slice*
+	str.slice(start,end);//提取字符串中两个指定的索引号之间的字符。
+	str.slice(-4,-2);//负数是从右边倒着往前数，而不是视为0
+	*/
+	/*var oSpan = document.getElementsByTagName("span")[0];
+	var oA = document.getElementsByTagName("a")[0];
+	var str = oSpan.innerHTML;
+	var onOff=true;//收缩开关
+	oA.onclick= function (){
+		if(onOff){
+			oSpan.innerHTML = str.substring(0,15);
+			oA.innerHTML = ">>展开";
+		}else{
+			oSpan.innerHTML = str;
+			oA.innerHTML = ">>收缩";
+		}
+		onOff = !onOff;
+	}*/
+
+	/*--------------------------4.随机彩色文字-------------------------------------------*/
+	/*var oDiv = document.getElementById("demo3");
+	var oText = oDiv.getElementsByTagName("textarea")[0];
+	var aInput = oDiv.getElementsByTagName("input");
+	var oDivv = oDiv.getElementsByTagName("div")[0];
+
+	aInput[1].onclick = function(){
+		var str = aInput[0].value;
+		var arr = str.split("");
+		var arrColor = ["#f4806d","#c02727","#ff771b","#f6a9ce"];
+		for(var i=0;i<arr.length;i++){
+			arr[i] =  '<span style="background:' + arrColor[i%arrColor.length] + ';">' + arr[i] + '</span>';
+		}
+		console.log(arr);//数组
+		oDivv.innerHTML += arr.join("");;
+	}*/
+
+	/*------------------------------5.高亮显示、替换关键字实例-------------------------------------*/
+	//oP.innerHTML = oP.innerHTML.split(str).join('<span>'+Str+'</span>');
+	//oP.innerHTML.split(str) 以str搜索词为分割点，去掉str留下其他，数组形式
+	//XX.join ('<span>'+newStr+'</span>'),以加了标签[样式]的搜索词为连接，再把数组们连接成字符串。好聪明！！！
+	
+
+</script>
+<!--
+1. 字符串获取类 string
+	var str = '妙味课堂';
+	alert( str.length );
+	alert( str.charAt() );
+
+    alert( str.charCodeAt() );			 22937->妙 Unicode编码值，汉字独立的编码
+    alert( String.fromCharCode(22937) ); 根据Unicode编码值返回对应汉字
+	alert( str.charCodeAt(1) );		 21619
+
+	alert( str.charCodeAt() );			 0~9对应 48~57			a~z对应	97~122			A~Z对应   65~90
+	alert( String.fromCharCode(22937, 21619) );——>妙味
+
+	g.1 文本框检测数字的方法
+
+2. fromCharCode返回字符串实例、字符串加密
+	获取元素的unicode码值然后对值进行加减，然后编码回来
+	string.fromCharCode(str.charCodeAt(i)-1000);
+
+3.  indexOf  从左往右找
+	lastIndexOf 从右往左找
+
+4.比较类、截取类、substring应用实例
+	str.substring();
+	str.slice();
+	g.2 收缩展开
+5.大小写转换、split分割字符串
+	
+// alert( str.toUpperCase() );			// 转成大写
+// alert( str.toLowerCase() );			// 转成小写
+var str = 'www.miaov.com';
+// alert( typeof str.split('.') );				//分割返回数组 [ 'www', 'miaov', 'com' ]
+
+alert( str4.split('-', 3) );//分割好的数组取前三个
+var str1 = 'leo';
+// alert( typeof str1.split() );			// [ 'leo' ]
+// alert( str1.split('') );			// [ 'l', 'e', 'o' ] 以空分割字符串
+
+
+6.split彩色文字效果实例
+	1.字符串分割为单个的字 得到数组[字符串转数组] split
+	2.颜色随机[伪]
+	3.标签包住数组 
+	4.数组转换为字符串 arr.join
+
+7.高亮显示关键字实例、替换搜索关键字实例
+
+
+-->
+</html>
