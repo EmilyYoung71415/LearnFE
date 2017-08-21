@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id="div1">
+		<p id="p1">This is a paragraph.</p>
+		<p id="p2">This is another paragraph.</p>
+	</div>
+
+<script type="text/javascript">
+		var element=document.getElementById("div1");
+		var para=document.createElement("p");//创造节点
+		var node=document.createTextNode("This is new.");//文本节点
+		para.appendChild(node);//把新的子节点node文本添加到指定节点para。
+		element.appendChild(para);//子节点para添加到element上
+		var child1 = document.getElementById("p1");
+		//element.removeChild(child1);
+		element.replaceChild(para,child1);
+		var txt=document.getElementById("p2").childNodes[0].nodeValue;
+		console.log(txt);
+		document.write(txt);
+</script>
+</body>
+
+</html>
+
+<!--
+	1.DOM简介：
+		HTML DOM 定义了所有 HTML 元素的对象和属性，以及访问它们的方法。
+		换言之，HTML DOM 是关于如何获取、修改、添加或删除 HTML 元素的标准。
+	
+	2.节点：
+		父（parent）、子（child）和同胞（sibling）
+	
+	3.DOM 方法
+		方法是我们可以在节点（HTML 元素）上执行的动作。
+		HTML DOM 对象 - 方法
+		一些常用的 HTML DOM 方法：
+			getElementById()	返回带有指定 ID 的元素。
+			getElementsByTagName()	返回包含带有指定标签名称的所有元素的节点列表（集合/节点数组）。
+			getElementsByClassName()	返回包含带有指定类名的所有元素的节点列表。
+
+			appendChild()	把新的子节点添加到指定节点。
+			removeChild()	删除子节点。
+			replaceChild()	替换子节点。
+
+			getAttribute()	返回指定的属性值。
+			setAttribute()	把指定属性设置或修改为指定的值。
+
+	3.DOM 属性：
+		属性是节点（HTML 元素）的值，您能够获取或设置。
+		一些常用的 HTML DOM 属性：
+			innerHTML - 节点（元素）的文本值
+			parentNode - 节点（元素）的父节点
+			childNodes - 节点（元素）的子节点
+			attributes - 节点（元素）的属性节点
+
+	4.DOM 访问
+			getElementById()	返回带有指定 ID 的元素。
+			getElementsByTagName()	返回包含带有指定标签名称的所有元素的节点列表（集合/节点数组）。
+			getElementsByClassName()	返回包含带有指定类名的所有元素的节点列表。
+
+	5.DOM 修改
+			获取 HTML 内容
+				改变元素内容的最简答的方法是使用 innerHTML 属性。
+				childNodes 和 nodeValue 属性来获取元素的内容
+
+
+			改变 HTML 样式
+				document.getElementById("p2").style.color="blue";
+			创建新的 HTML 元素
+				如需向 HTML DOM 添加新元素，您首先必须创建该元素（元素节点），然后把它追加到已有的元素上
+	6.DOM 元素
+			添加、删除和替换 HTML 元素。
+			添加：appendChild()、insertBefore()
+				appendChild()将新元素作为父元素的最后一个子元素进行添加。		
+				insertBefore() 添加到最前
+			删除:removeChild()
+				如需删除 HTML 元素，您必须清楚该元素的父元素：
+				能否在不引用父元素的情况下删除某个元素？
+				var child=document.getElementById("p1");
+				child.parentNode.removeChild(child);
+			替换：
+				replaceChild()
+
+
+
+	7.DOM 事件
+			onload 和 onunload 事件
+			onchange 事件 onchange 事件常用于输入字段的验证。
+			onmouseover 和 onmouseout 事件可用于在鼠标指针移动到或离开元素时触发函数。		
+			onmousedown[鼠标点下但是还未松开时]
+			onmouseup [鼠标松开]
+
+-->
+
+
+
+
+

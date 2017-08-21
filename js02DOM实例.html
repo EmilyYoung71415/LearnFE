@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<!-- <p>你喜欢怎么喝咖啡？</p>
+	<form>
+		<input type="checkbox" name="coffee" value="奶油">加奶油<br />
+		<input type="checkbox" name="coffee" value="糖块">加糖块<br />
+		<br />
+		<input type="button" onclick="createOrder()" value="发送订单">
+		<br /><br />
+		<input type="text" id="order" size="50">
+	</form> -->
+	<!--当达到文本域的最大字符数时跳至下一个域-->
+	<form id="myForm">
+		<input size="3" tabindex="1" maxlength="3" onkeyup="checkLen(this,this.value)">
+		<input size="2" tabindex="2" maxlength="2" onkeyup="checkLen(this,this.value)">
+		<input size="3" tabindex="3" maxlength="3" onkeyup="checkLen(this,this.value)">
+	</form>
+
+
+</body>
+<script type="text/javascript">
+	/*form表单里的若干checkbox*/
+	var text ="";
+	function createOrder(){
+		var choose=document.forms[0].coffee;//获取到form里面的众多name为coffee的选项
+		for(var i=0;i<choose.length;++i){
+			if(choose[i].checked){
+				text += choose[i].value;
+			}
+		}
+		document.getElementById("order").value = "您订购的咖啡带有： " + text;
+	}	
+				
+	/*当达到文本域的最大字符数时跳至下一个域*/
+	function checkLen(x,y){
+		if (y.length==x.maxLength){
+			var next=x.tabIndex
+			if (next<document.getElementById("myForm").length){
+				document.getElementById("myForm").elements[next].focus()
+			}
+		}
+	}
+	
+
+
+
+</script>
+
+
+</html>
+
+
+<!-- 
+	1.Anchor 对象
+		使用 focus() 和 blur()
+		xx.focus()//获取焦点
+		xx.blur()//失去焦点
+	2.Document 对象
+		document.write();
+		document.write("<h1>你好啊</h1>")
+	3.Event 对象
+		3.1判断鼠标的哪个键被点击[左右中]
+			onmousedown="whichButton(event)"
+			function whichButton(event){
+				var btnNum = event.button;
+				btnnum 0 左键 1 中键 2 右键
+			}
+		3.2 获取光标的坐标
+			event.clientX;
+			event.clientY;
+		3.3 获取按键的unicode
+			xx.keyCode
+		3.4 shift键被按下
+			event.shiftKey==1
+	4. Form 和 Input 对象
+		4.1 选定以及不选定 checkbox
+			xx.checkbox = true/flase;
+		4.2 一个表单中的若干个 checkbox
+		4.3 重置表单 xxform.reset
+			form表单
+			<form action="form_action.asp" method="get">
+			enctype：规定在发送表单数据之前如何对其进行编码。
+			method	get/post
+			action	URL	规定当提交表单时向何处发送表单数据。
+		4.4 提交表单 xxform.submit()
+		4.5 表单中的下拉列表
+			<select>
+				<option value=""></option>
+				<option value=""></option>}
+			</select>
+			//xxselect.options[xxselect.selectedIndex].text 当前下拉列表的值
+		4.6 当达到文本域的最大字符数时跳至下一个域
+	
+	5. Option 和 Select 对象
+
+
+
+
+
+
+	5.Location 对象
+		5.1 重新加载文档
+			window.location.reload();
+
+
+
+
+
+
+ -->
