@@ -5,8 +5,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<link rel="stylesheet" href="">
+	<style type="text/css">
+		table,th,td{border:1px solid black;}
+	</style>
 </head>
 <body>
+	<!--1. form表单里的若干checkbox -->
 	<!-- <p>你喜欢怎么喝咖啡？</p>
 	<form>
 		<input type="checkbox" name="coffee" value="奶油">加奶油<br />
@@ -16,18 +20,30 @@
 		<br /><br />
 		<input type="text" id="order" size="50">
 	</form> -->
-	<!--当达到文本域的最大字符数时跳至下一个域-->
-	<form id="myForm">
+	<!--2. 当达到文本域的最大字符数时跳至下一个域-->
+	<!-- <form id="myForm">
 		<input size="3" tabindex="1" maxlength="3" onkeyup="checkLen(this,this.value)">
 		<input size="2" tabindex="2" maxlength="2" onkeyup="checkLen(this,this.value)">
 		<input size="3" tabindex="3" maxlength="3" onkeyup="checkLen(this,this.value)">
-	</form>
-
-
+	</form> -->
+	<!-- 3.表格操作 -->
+	<!-- <table id="tab">
+		<thead>
+			<tr >
+				<th >序列号</th>
+				<th>学号</th>
+				<th>姓名</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+	
+		</tbody>
+	</table> -->
 </body>
 <script type="text/javascript">
-	/*form表单里的若干checkbox*/
-	var text ="";
+	/*1.form表单里的若干checkbox*/
+	/*var text ="";
 	function createOrder(){
 		var choose=document.forms[0].coffee;//获取到form里面的众多name为coffee的选项
 		for(var i=0;i<choose.length;++i){
@@ -36,17 +52,64 @@
 			}
 		}
 		document.getElementById("order").value = "您订购的咖啡带有： " + text;
-	}	
+	}	*/
 				
-	/*当达到文本域的最大字符数时跳至下一个域*/
-	function checkLen(x,y){
+	/*2.当达到文本域的最大字符数时跳至下一个域*/
+	/*function checkLen(x,y){
 		if (y.length==x.maxLength){
 			var next=x.tabIndex
 			if (next<document.getElementById("myForm").length){
 				document.getElementById("myForm").elements[next].focus()
 			}
 		}
-	}
+	}*/
+
+	/*3.表格操作 */
+	/*window.onload = function(){
+		var data = [//将data填在表格中----复习下创建结点的知识点
+			{id:1,number:5120152688,username:'哈哈'},
+			{id:2,number:5120162512,username:'哈哈哈'},
+			{id:3,number:5120142698,username:'哈哈哈哈'},
+		]
+		var oTab =document.getElementById("tab");
+		var oTbody = oTab.tBodies[0];
+		//console.log(oTbody);
+
+		for(var i=0;i<data.length;i++){
+			var oTr = document.createElement('tr');
+			//一列一列的加
+			var oTd = document.createElement("td");
+			oTd.innerHTML = data[i].id;
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement("td");
+			oTd.innerHTML = data[i].number;
+			oTr.appendChild(oTd);
+
+			oTd = document.createElement("td");
+			oTd.innerHTML = data[i].username;
+			oTr.appendChild(oTd);
+
+			var oA = document.createElement("a");
+			oA.innerHTML = "删除";
+			oA.href ="#";
+			oA.onclick  = function(){
+				oTbody.removeChild(this.parentNode);
+			}
+			oTr.appendChild(oA);
+			oTbody.appendChild(oTr);
+			//隔行变色
+			if(i%2){
+				oTr.style.background ="white";
+			}else{
+				oTr.style.background ="#ddd";
+			}
+		}
+	}*/
+
+	/*表单应用*/
+
+
 	
 
 
@@ -98,20 +161,19 @@
 			//xxselect.options[xxselect.selectedIndex].text 当前下拉列表的值
 		4.6 当达到文本域的最大字符数时跳至下一个域
 	
-	5. Option 和 Select 对象
-
-
-
-
-
-
-	5.Location 对象
-		5.1 重新加载文档
+	5.1 重新加载文档
 			window.location.reload();
 
 
+	一.表单事件
+		1.  获取tBodies、tHead、tFoot、rows、cells
+			表格的创建
+			数据添加
+			隔行变色
+			删除一行
 
 
+	
 
 
  -->
