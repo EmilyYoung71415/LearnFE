@@ -5,15 +5,50 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<link rel="stylesheet" href="">
+	<style>
+		*{padding: 0;margin: 0;}
+		div {padding: 40px 50px;color: red;}
+		#div1 {background: black;}
+		#div2 {background: gray;position: relative;}
+		#div3 {background: lightgray; position: relative;}
+		.active{background: orange;}
+	</style>
+
 </head>
 <body>
+	<!--1. 初试
 	<div id="div1">
 		<p id="p1">This is a paragraph.</p>
 		<p id="p2">This is another paragraph.</p>
+	</div> -->
+	
+	<!--2. 元素宽高
+	<div id="div1" style="width: 100px; height: 100px; border: 1px solid red; padding: 10px; margin: 10px;font-size: 24px;">
+		你好啊
+	</div> -->
+
+	<!-- 3. 获取绝对位置
+	 <div id="div1">
+	    	<div id="div2">
+	        	<div id="div3"></div>
+	        </div>
+	 </div> -->
+
+	<!--4. getElementsByClassName、5.addClass、removeClass函数-->
+	<!-- <div id="bigboss">
+		<input type="text" value="1" class="test" id="test1">
+		<input type="text" value="2" class="test demo2" id="test2">
+		<p class="test">哈哈哈哈哈哈</p>
 	</div>
+	<input type="text" value="2"> -->
+
+
+
+
 
 <script type="text/javascript">
-		var element=document.getElementById("div1");
+		/*1.dom初试*/
+		/*var element=document.getElementById("div1");
 		var para=document.createElement("p");//创造节点
 		var node=document.createTextNode("This is new.");//文本节点
 		para.appendChild(node);//把新的子节点node文本添加到指定节点para。
@@ -22,8 +57,105 @@
 		//element.removeChild(child1);
 		element.replaceChild(para,child1);
 		var txt=document.getElementById("p2").childNodes[0].nodeValue;
-		console.log(txt);
-		document.write(txt);
+		//console.log(txt);
+		document.write(txt);*/
+
+		/*2.元素宽高*/
+		/*var oDiv = document.getElementById('div1');
+		console.log( oDiv.style.width );	//[100px]
+		console.log( oDiv.clientWidth );	//可视区宽:样式宽 + padding	[120] 
+		console.log( oDiv.offsetWidth );	//占位宽： 样式宽 + padding + border  可视区宽 + 边框	[122]
+		console.log(oDiv.scrollHeight );*/
+
+		/*3.获取绝对位置的封装函数*/
+		//var oDiv3 = document.getElementById('div3');
+		//console.log(oDiv3.offsetTop,oDiv3.offsetLeft);
+		//80 100 div3{position:relative;} 此时是相当于body的偏移值即绝对位位置	
+		//console.log(oDiv3.offsetTop,oDiv3.offsetLeft);
+		//40 50  div3，div2{position:relative;}  此时是相当于div2
+		/*var p = getPos(oDiv3);
+		console.log(p);
+		function getPos(obj) {
+			var pos = {top:0, left:0};
+			while (obj) {
+				pos.left += obj.offsetLeft;//相对于定位父级元素
+				pos.top += obj.offsetTop;
+				obj = obj.offsetParent;//自己变身最近的父级元素，层层迭代
+			}
+			return pos;
+		}*/
+
+		/*4.函数 getElementByClassName*/
+		/*var oBoss = document.getElementById("bigboss");
+		var oTs = getElementsByClassName(oBoss,"p",'test');
+		for(var i = 0;i<oTs.length;i++){
+			console.log(oTs[i].innerHTML);
+		}
+		//console.log(oTs.length);
+		function getElementsByClassName(parent,tagname,classname){
+			var aBody = parent.getElementsByTagName(tagname);
+			var arr= [];
+			for(var i = 0;i<aBody.length;i++){
+				//if(aBody[i].className == classname){
+				//	arr.push(aBody[i]);
+				//}
+				var aClassname = aBody[i].className.split(" ");//以空格为分解划分两个
+				for(var j = 0;j<aClassname.length;j++){
+					if(aClassname[j] == classname){
+						arr.push(aBody[i]);
+					}
+				}
+			}
+			return arr;
+		}*/
+
+		/*5. addClass、removeClass函数*/
+		/*var oTest1 = document.getElementById("test1");
+		var oTest2 = document.getElementById("test2");
+		addClass(oTest1,"active");
+		removeClass(oTest2,"demo2");
+
+		function addClass(obj,classname){
+			//如果原来没有class
+			if(obj.className == ""){
+				obj.className = classname;
+			}else{//如果原来有class
+				//if(obj.className==classname) return;
+				var aClassname = obj.className.split(" ");
+				var _index = arrIndexof(aClassname,classname);
+				if(_index==-1){//如果原来有的class和添加的不一样
+					obj.className = " " + classname;
+				}
+				//如果原来有的class和添加的一样,什么也不去改变
+			}
+		}
+
+		function removeClass(obj,classname){
+			//如果原来有class，
+			if(obj.className!=""){
+				//拆分class名，去掉要去掉的那个
+				var aClassname = obj.className.split(" ");
+				var _index = arrIndexof(aClassname,classname);//返回新得的拆分数组的符合特定的某下标
+				if(_index!=-1){//找到了符合条件的
+					//依照索引值，从数组里删去对应的数据
+					aClassname.splice(_index,1);//从第几号开始，删除几个
+					obj.className = aClassname.join(" ");//然后拼接数组
+				}
+			}
+			//如果原来没class
+		}
+
+		//对class拆分的数组进行比对
+		function arrIndexof(arr,v){
+			for(var i=0;i<arr.length;i++){
+				if(arr[i]==v){
+					return i;
+				}
+			}
+			return -1;//class没有标签相同
+		}*/
+
+
 </script>
 </body>
 
@@ -96,6 +228,61 @@
 			onmouseover 和 onmouseout 事件可用于在鼠标指针移动到或离开元素时触发函数。		
 			onmousedown[鼠标点下但是还未松开时]
 			onmouseup [鼠标松开]
+	
+	(一) DOM基础概念、操作
+		1.父子兄
+			children : 只读 属性 子节点列表集合
+			子节点child
+			firstChild||firstElementChild : 只读 属性 第一个子节点
+			lastChild || 元素.lastElementChild 最后一个子节点
+			兄弟节点subling
+			nextSibling || 元素.nextElementSibling 下一个兄弟节点
+			previousSibling || 元素.previousElementSibling 上一个兄弟节点
+			父节点 parent
+			parentNode : 只读 属性 当前节点的父级节点
+			offsetParent : 只读 属性 离当前元素最近的一个有定位属性的父节点(如果没有定位的父元素，默认为body)
+			offsetLeft[Top] : 只读 属性 当前元素到定位父级的距离（偏移值）
+							  到当前元素的offsetParent的距离
+			注：如果没有定位父级  offsetParent -> body
+								  offsetLeft -> html
+		
+		2.元素宽高
+			style.width : 样式宽 100
+			clientWidth : 可视区宽 100+10+10
+			offsetWidth	: 占位宽 100+10+10+1+1
+			scrollWidth：对象的实际内容的宽度，不包边线宽度，会随对象中内容超过可视区后而变大。  120+
+			<div id="div1" style="width: 100px; height: 100px; border: 1px solid red; padding: 10px; margin: 10px;"></div>
+
+		3.绝对位置函数的封装
+		4.操作元素属性的多种方式
+			元素.setAttribute(属性名称，属性值); 方法 给指定元素指定的属性设置值
+			oText.setAttribute( 'value', 'hello' );
+			元素.removeAttribute(属性名称); 方法 移除指定的元素的指定的属性
+			oText.removeAttribute( 'value' );
+			元素.getAttribute('width')可以获取元素属性实际的值
+
+	(二) DOM、BOM相关方法及属性
+		1. 函数getElementByClassName封装
+			1.获取页面的所有元素，数组
+			2.数组里寻找符合 className= 特定值的元素
+			3.优化：针对class="test demo" 的情况
+			4.封装函数，父级元素不是body，传值代替document，在某一特定下寻找特定标签
+			5.带有class标签里的特定tag类(input ,div等)
+		
+		2.函数addClass
+			
+
+
+
+			
+
+
+
+	
+
+
+
+
 
 -->
 
