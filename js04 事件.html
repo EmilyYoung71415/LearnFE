@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style type="text/css">
+		#mousefollow{height: 40px;width: 40px;border-radius: 100%;background: orange;position: absolute;}
+		span{width: 100px;height: 200px;border:1px solid orange;display: none;}
+	</style>
+</head>
+<body >
+	<!-- 2. 鼠标跟随
+	<div id="mousefollow"></div> -->
+
+	<!-- 3. 冒泡事件
+	<div>
+		<input type="button" value="登陆">
+		<span ></span>
+	</div> -->
+</body>
+<script type="text/javascript">
+
+	/*1.事件函数，event对象*/
+	/* 
+	function fn(ev){
+		//alert(ev);
+	 	//var ev =ev||event;
+	 	for ( var attr in ev ) {
+			console.log( attr + ' = ' + ev[attr] );
+		}
+
+	 }	
+	 document.onclick = fn;*/
+
+	 /*2.鼠标跟随 clientX[Y]*/
+	 /*window.onload = function (){
+	 	//onmousemove : 当鼠标在一个元素上面移动的触发
+	 	var oDiv = document.getElementById("mousefollow");
+
+	 	document.onmousemove = function (ev){
+	 		//console.log(1);
+	 		var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;//内容区域
+	 		oDiv.style.left = ev.clientX + "px";//clientX是可视区域，相对可视区域的位置
+	 		oDiv.style.top = ev.clientY   + scrollTop + "px";
+	 	}
+	 }*/
+
+
+	 /*3. 事件流 冒泡*/
+	 /*var oInput = document.getElementsByTagName("input")[0];
+	 var oSpan = document.getElementsByTagName("span")[0];
+	 oInput.onclick =function(ev){//这个的点击动作会冒泡到上层的document。消去此处冒泡
+	 	oSpan.style.display = "block";
+	 	ev.cancelBubble=true;//阻止当前对象的当前事件的冒泡
+	 }
+	 document.onclick = function(){
+	 	oSpan.style.display = "none";
+	 	/*setTimeout(function(){//测试
+	 		oSpan.style.display = "none";
+	 	},1000)
+	 }*/
+
+</script>
+	
+
+
+
+
+
+
+
+<!--
+	1.焦点事件
+			obj.focus() 给指定的元素设置焦点
+			obj.blur() 取消指定元素的焦点
+			obj.select() 选择指定元素里面的文本内容
+
+	2.Event对象
+		1.事件流 冒泡
+			事件对象必须在一个事件调用的函数里面使用才有内容
+			事件函数：事件调用的函数，一个函数是不是事件函数，不在定义的决定，而是取决于这个调用的时候
+			标准下 : 事件对象是通过事件函数的第一个参数传入
+			clientX[Y] : 当一个事件发生的时候，鼠标到页面可视区的距离
+
+		2.事件流 绑定事件的第二种形式 addEventListener
+			document.onclick = fn1;
+			document.onclick = fn2;	//赋值形式,会覆盖前面绑定fn1
+			addEventListener:
+			标准：obj.addEventListener(事件名称，事件函数，是否捕获);
+				1.有捕获 (是否捕获 : 默认是false    false:冒泡 true：捕获)
+				2.事件名称没有on
+				3.事件执行的顺序是正序
+				4.this触发该事件的对象
+
+		3. call  	call 函数下的一个方法，
+			call方法第一个参数可以改变函数执行过程中的内部this的指向，
+			call方法第二个参数开始就是原来函数的参数列表
+
+ 			function fn1(a, b) {
+				alert(this);//window
+				alert(a + b);
+			}
+			fn1.call(1, 10, 20);	//this ->1
+			fn1.call(null, 10, 20);	// null ->啥也不变，this还是指向原来的window
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+		用来获取事件的详细信息：鼠标位置、键盘按键
+		Event对象的兼容：ev = ev || window.event
+		Event对象下的获取鼠标位置：clientX clientY
+		例子：方块跟着鼠标移动
+
+
+	3.事件流
+		事件冒泡：  
+		当一个元素接收到事件的时候，会把他接收到的所有传播给他的父级，一直到顶层window.事件冒泡机制
+		
+
+
+		取消冒泡：ev.cancelBubble=true
+			例子：仿select控件
+		事件捕获
+			Ie下是没有的，在绑定事件中，标准下是有的
+
+
+
+
+
+
+
+-->
+
+
+
+
+</html>
