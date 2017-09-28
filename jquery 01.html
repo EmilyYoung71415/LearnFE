@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body>
+	<!-- 1.设计思想
+	<div id="div1"></div>
+	<div class="div2"></div>
+	<ul>
+		<li class="box"></li>
+		<li title="hello"></li>
+		<li title="hello"></li>
+		<li class="box"></li>
+	</ul> -->
+
+	<!-- 
+		常用方法-->
+	<div class="demo" title="678">678</div>
+	<div class="demo" title="8">8</div>
+	<div class="box" title="5">
+		<span>131415</span>
+	5</div>
+
+	<i>i:154548</i>
+	<p>span:264</p>
+
+	<ul>
+		<h3>h3</h3>
+		<h3>h3</h3>
+		<h2 id="sss">h2</h2>
+		<h3>h3</h3>
+	</ul>
+
+
+</body>
+<script src="js/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+	/*JQ设计思想
+		选择网页元素：
+			模拟css选择器
+			独有表达式选择
+			多种筛选方法
+		写法：
+			方法函数化
+			链式操作
+			取值赋值合体
+
+	*/
+
+	//选择器
+	/*
+		$("#div1")//id选择器
+		$(".div2")//class选择器
+		$("div")//标签选择器
+		
+	*/
+	/*
+	$(".box").css('background','red');
+	$("li:first").css('background','green');
+	$("li:eq(2)").css('background','green');//第三个元素
+	$("li:odd").css('background','orange');//偶数行
+	$("li:even").css('background','blue');//奇数行
+
+	//筛选
+	$('li').filter('.box').css('border','5px solid red');
+	$('li').filter('[title = hello]').css('border','5px solid red');
+	*/
+	/*jquery $()下的常用方法*/
+	/*has()
+	not()
+	filter()
+	next()
+	prev()
+	find()
+	eq()
+	index()
+	attr()
+	*/
+	
+	//attr
+	/*console.log($('.demo').attr('title'));//获取到属性值
+	console.log($('.demo').attr('class','box'));//class设置为了box*/
+	
+	//filter,not ,has 过滤
+	/*$('div').filter('.demo').css('background','yellow');
+	$('div').not('.demo').css('background','red');
+	$('div').has('span').css('color','white');*/
+
+	//寻找 next() prev() find() eq() 
+	$('i').next().css('color','red');
+	$('ul').find('h2').css('color','purple');
+	$('ul').find('h3').eq(2).css('background','green');
+
+	//索引 index() 当前元素在其所有兄弟结点中的位置
+	console.log($('#sss').index());//2 
+
+</script>
+</html>

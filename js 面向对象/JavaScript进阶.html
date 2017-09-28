@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+//词法作用域
+	/*function f1(){
+		var a =0;
+		return f2();
+	}
+
+	function f2(){
+		console.log(a);
+	}
+	//var a = 99;
+	f1();*/
+
+//通过闭包突破全局作用域链
+//形式一
+	/*function f1(){
+		var a = 131415;
+		return function (){
+			return a;
+		}
+	}
+	var test = f1();
+	alert(test());*/
+
+//形式二 闭包实现二
+	/*var n;//全局变量
+	function f2(){
+		var a = "king";
+		n = function (){
+			return a;
+		}
+	}
+	f2();
+	alert(n());*/
+
+//形式三
+	/*function f3(param){
+		var n = function (){
+			return param;
+		}
+
+		param++;
+		return n;//先++再返回n[调用函数]
+	}
+
+	var test = f3(56);
+	alert(test());*/
+
+//闭包
+//1.内部函数访问外函数变量
+//2.让变量始终保存在内存中   通过session设置了变量的值
+
+	/*function f1(){
+		var n = 1;
+		test = function (){
+			n+=1;
+		}
+		function f2(){
+			alert(n);
+		}
+		return f2;
+	}
+	var res = f1();
+	alert(res()); // 1 undefined
+	test();
+	alert(res()); //2 undefined*/
+	/*var setValue,getValue;
+	(function (){
+		var n = 0;
+		getValue = function(){
+			return n;
+		}
+
+		setValue = function(x){
+			n = x;
+		}
+	})()
+
+	alert(getValue());
+	setValue(3);
+	alert(getValue());*/
+
+//闭包实现迭代器效果
+	/*function test(x){
+		var i = 0;
+		return function (){
+			return x[i++];
+		};
+	}
+	var arr = test([1,23,4,5,7,800]);
+	alert(arr());*/
+
+//循环中的闭包
+	/*function f(){
+		var a = [];
+		var  i ;
+		for( i = 0;i<3;i++){
+			a[i] = function (){
+				return i;//指向i这个局部变量的引用，i的地址，只能返回i最后的值  [循环结束 ]
+			}
+		}
+		return a;
+	}
+	var test  = f();
+	alert(test[0]());//3*/
+
+
+//改进循环中的闭包
+	/*function f(){
+		var a = [];
+		var i;
+		for(i = 0;i<3;i++){
+			a[i] =(function(x){
+				return function(){
+					return x;
+				}
+			})(i);
+		}
+		return a;
+	}
+	var test = f();
+	//alert(test());//test is not a function ;
+	alert(test[0]());
+	alert(test[1]());*/
+
+//改进循环中的闭包 法2
+	/*function f(){
+		function test(x){
+			return function(){//闭包
+				return x;
+			}
+		}
+		var a = [];
+		var i;//通过中间函数将i本地化
+		for(i = 0;i<3;i++){
+			a[i] = test(i);
+		}
+		return a;
+	}
+
+	var res = f();
+	alert(res[0]());
+	alert(res[1]());*/
+
+	/*闭包注意事项*/
+/*
+	闭包会使得函数中的变量都被保存在内存中，内存消耗大，滥用影响网页性能;
+	
+
+
+
+
+*/
+
+</script>
+
+
+
+</html>

@@ -16,7 +16,7 @@
 	</style>
 </head>
 <body>
-	<div class="drag"></div>
+	<div class="drag" id="d"></div>
 	<div class="fixed"></div>
 	<div class="scrollhorizon"></div>
 	<div class="scrollvertical">
@@ -54,10 +54,10 @@
 	}*/
 	
 	//drag(oDiv[0]);
-
-	//drag(oDiv[1]);
+	var od = document.getElementById("d");
+	drag(od);
 	//拖拽函数封装
-	/*function drag(obj){
+	function drag(obj){
 		obj.onmousedown =function(ev){
 			var ev =ev||event;
 			var disX = ev.clientX - this.offsetLeft;
@@ -68,10 +68,10 @@
 				//限制区域的拖拽||磁性吸附
 				var L = ev.clientX - disX ; 
 				var T = ev.clientY - disY ;
-				if(collision(obj,oDiv[1])){
+				/*if(collision(obj,oDiv[1])){
 					console.log(1);
 					//oDiv[1].background = "blue";
-				}
+				}*/
 				if(L<0){
 					L = 0;
 				}else if(L>document.documentElement.clientWidth - obj.offsetWidth){
@@ -92,7 +92,7 @@
 	}
 
 	//碰撞检测
-	function collision (obj1,obj2){
+	/*function collision (obj1,obj2){
 		var L1 = obj1.offsetLeft;
 		var R1 = obj1.offsetLeft+ obj1.offsetWidth ; 
 		var T1 = obj1.offsetTop;

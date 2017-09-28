@@ -27,7 +27,7 @@
 		<input size="3" tabindex="3" maxlength="3" onkeyup="checkLen(this,this.value)">
 	</form> -->
 	<!-- 3.表格操作 -->
-	<!-- <table id="tab">
+    <table id="tab">
 		<thead>
 			<tr >
 				<th >序列号</th>
@@ -39,7 +39,7 @@
 		<tbody>
 	
 		</tbody>
-	</table> -->
+	</table>
 </body>
 <script type="text/javascript">
 	/*1.form表单里的若干checkbox*/
@@ -65,7 +65,7 @@
 	}*/
 
 	/*3.表格操作 */
-	/*window.onload = function(){
+	window.onload = function(){
 		var data = [//将data填在表格中----复习下创建结点的知识点
 			{id:1,number:5120152688,username:'哈哈'},
 			{id:2,number:5120162512,username:'哈哈哈'},
@@ -105,9 +105,11 @@
 				oTr.style.background ="#ddd";
 			}
 		}
-	}*/
+	}
 
-	/*表单应用*/
+	/*4.表单应用*/
+
+
 
 
 	
@@ -171,7 +173,15 @@
 			数据添加
 			隔行变色
 			删除一行
+		2.表单
+			可根据name进行索引，后端获取数据是通过name来的
+			<form id="XX">
+				<input name="sex">
+			</form>
+			var oXX= xxxx;
+			oXX.sex//获取input
 
+		
 
 	
 

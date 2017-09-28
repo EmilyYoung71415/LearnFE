@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<!-- 
+		1.引言
+			1.5 面向对象设计（对象，类，封装，聚合，继承，多态）
+
+
+		2 基本数据类型，数组（增，删，更新），循环，条件表达式
+		2.1基本数据类型	
+			数据类型{
+				1.基本类型：数字，字符串，布尔值，undefined（不存在的变量或是未初始化的变量），null（变量已定义）；
+				2.非基本：对象
+			}
+
+			类型操作符 typeof{
+				number,
+				string,
+				boolean,
+				undefined
+				object
+				function
+			}
+
+			八进制和十六进制{
+				数字0开头：八进制
+				0x前缀表示十六进制
+			}
+
+			指数表示法{
+				2e+3===>2000  将小数点右移3位
+				123.456e-3===>0.123456  将小数点左移3位
+				js能处理的范围值：
+					5e-324~1.79769313148621357e+308
+			}
+
+			Infinity{===>number
+				1.超出js处理范围的值
+				2.任何数除0 
+			}
+			
+			NaN[not a number]{===>number}
+			
+			字符串转换{
+				1.[偷懒法]数字字符串转换为数字：字符串与1相乘;
+				2.调用parseInt函数;
+				3.其他类型转换为字符串: 将其与空字符串相连
+					var x = 1 +"";
+			}
+
+			特殊字符(转义字符等)
+
+
+3.函数
+    预定义函数{
+		parseInt();
+		parseFloat();
+		isNaN();
+		isFinite();//检查输入是否是一个既非infinity也非NaN的数字
+		encodeURI();
+		decodeURI();
+		encodeURIComponent();
+		decodeURIComponent();
+		eval();//将输入的字符串当成js代码执行 尽量避免使用
+    }
+
+ 	变量的作用域{
+		1.尽量将全局变量数量降到最低
+		2.局部函数域  优先级大于全局函数域
+ 	}
+
+	函数也是数据{
+		匿名函数，
+		回调函数，
+		自调函数，
+		私有函数
+
+
+
+
+	}
+
+	
+	闭包（作用域链，词法作用域，利用闭包突破作用域链，迭代器）
+4.对象
+	4.1从数组到对象
+	4.2内建对象（Math，Date）
+5.原型
+	5.1原型属性
+		利用原型添加方法和属性
+		isPrototypeOf（）方法
+
+6.继承
+	原型链
+	uber
+	深拷贝
+	多重继承
+	寄生式继承
+	构造器借用
+	
+		
+
+
+
+
+
+
+
+
+	-->
+</body>
+
+<script type="text/javascript">
+
+	/*第二章 基本数据类型课后习题*/
+	var a;
+	//console.log(typeof a);//undefined 未初始化的变量
+
+	var s = "1s";
+	s++;
+	//console.log(s);//NaN
+
+	//console.log(!!"false");//true
+	//console.log(!!undefined);//false
+	//console.log(typeof(-Infinity));//number
+	//console.log(10%"0");//NaN
+	//console.log(undefined == null)//true
+	//console.log(false === "")//false
+	//console.log(typeof("2e+2"));//string
+
+	var a = 3e+3;
+	a++;
+	//console.log(a);//3001
+
+	//var v = v||10;//10
+	//var v = v||100;//100
+	//var v = v||0;//0
+	//var v = v || null;//null
+	var v = v||10;
+	delete v;	//10
+	//console.log(v);
+
+	/*第三章 函数*/
+
+	var global = 1;
+	function f(){
+		var local = 2;
+		global++;
+		return global;
+	}
+	//console.log(f());//2
+	//console.log(local);//local is not defined;
+
+	var b = 123;
+	function f(){
+		console.log(b);//undefined
+		//函数域优先于全局域，局部变量b会优先覆盖所有与它同名的全局变量
+		var b = 1;
+		console.log(b);//1
+	}
+	f();
+
+</script>
+</html>
