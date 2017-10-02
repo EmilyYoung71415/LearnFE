@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>变量的解构赋值</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+//ES6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构。
+//可大量减少代码量
+//数组解构赋值
+//从数组中提取值，按照位置的对象关系对变量赋值。	
+/*let [a,b,c]=[1,2,3];//let a=0;let b=1;let c=2;
+console.log(a,b,c);*/
+//解构的默认值：
+/*let [a,b="JSPang"]=['技术胖']
+console.log(a+b);*/ //控制台显示“技术胖JSPang”
+{
+	//默认值中undefined 与null区别
+	let [a,b="JSPang"]=['技术胖',undefined];
+	console.log(a+b); //控制台显示“技术胖JSPang” undefined相当于什么都没有，b是默认值。
+}
+
+
+{
+	let [a,b="JSPang"]=['技术胖',null];
+	console.log(a+b); //控制台显示“技术胖null”  null相当于有值，但值为null。所以b并没有取默认值，而是解构成了null。
+}
+
+// 对象的解构赋值
+let {foo,bar} = {foo:'JSPang',bar:'技术胖'};
+console.log(foo+bar); //控制台打印出了“JSPang技术胖”
+//数组的元素是按次序排列，对象属性没有次序，变量必须与属性同名
+
+//圆括号的使用
+//如果在解构之前就定义了变量，这时候你再解构会出现问题
+{
+	let foo;
+	//{foo} ={foo:'JSPang'}; 外面包个圆括号
+	({foo} ={foo:'JSPang'});
+	console.log(foo);
+}
+
+const [a,b,c,d,e,f]="JSPang";
+
+</script>
+</html>
