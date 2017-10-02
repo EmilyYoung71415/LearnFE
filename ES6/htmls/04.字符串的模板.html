@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>新的声明方式</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+//ES6对字符串新增的操作
+//字符串模版的出现让我们再也不用拼接变量了，而且支持在模板里有简单计算操作
+//es5
+{
+	let jspang='技术胖';
+	//let blog = '非常高兴你能看到这篇文章，我是你的老朋友'+jspang+'。这节课我们学习字符串模版。';
+	let blog = `<b>非常高兴你能看到这篇文章</b>，我是你的老朋友${jspang}。<br/>这节课我们学习字符串模版。`;
+	console.log(blog);
+}
+
+//对运算的支持
+{
+	let a=1;
+	let b=2;
+	let result=`${a+b}`;
+	//document.write(result);
+}
+
+
+//字符串查找 includes  startsWith 
+//ES6还增加了字符串的查找功能，而且支持中文
+{
+	//es5
+	let jspang='技术胖';
+	let blog = '非常高兴你能看到这篇文章，我是你的老朋友技术胖。这节课我们学习字符串模版。';
+	//document.write(blog.indexOf(jspang));//20
+	//document.write(blog.includes(jspang));//不返回索引值，是true/false
+	console.log(blog.startsWith(jspang));//判断开头是否存在
+	console.log(blog.endsWith(jspang));//判断结尾是否存在
+}
+
+//复制字符串
+{
+	document.write('jspang|'.repeat(3));
+}
+</script>
+</html>
