@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>新的声明方式</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	//var 是全局声明，let 是局部变量声明
+let a = 9;
+console.log(a);
+
+var b=2;
+{
+	let b =9;
+}
+console.log(b);
+//let是防止你的数据污染的
+/*for(var i=0;i<10;i++){
+console.log('循环体中:'+i);//0-9
+}
+console.log('循环体外:'+i);//10
+*/
+/*for(let i=0;i<10;i++){
+console.log('循环体中:'+i);
+}
+console.log('循环体外:'+i);*///i is not defined
+
+//const声明变量 不变量
+const name ="yxy";
+//var name = "haha ";//Identifier 'name' has already been declared 即不允许修改
+console.log(name);
+
+</script>
+</html>
