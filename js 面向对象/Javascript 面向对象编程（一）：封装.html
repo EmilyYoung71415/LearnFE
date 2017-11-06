@@ -55,11 +55,14 @@
 
 	//console.log(cat1.constructor == Cat);//cat1.constructor属性指向它们的构造函数
 	//Javascript还提供了一个instanceof运算符，验证原型对象与实例对象之间的关系。
-	//console.log( cat1 instanceof  Cat);
-	
+	//console.log( cat1 instanceof  Cat);//true
+	//构造函数的缺点：浪费内存
+
+
 	/*四. Prototype模式*/
 	//解决让某公用属性或方法在内存中只生成一次，然后所有实例都指向那个内存地址，不占用多的内存提高效率
 	//Javascript规定，每一个构造函数都有一个prototype属性，指向另一个对象。这个对象的所有属性和方法，都会被构造函数的实例继承。
+	//即可把一些不变的属性和方法 直接定义在prototype对象上
 	function Cat(name,color){
 		this.name = name;
 		this.color = color;
