@@ -64,12 +64,14 @@
             const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
             const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
 
+            if(!audio) return; if(!key) return
+
             // [2] 让标签干活
             // div 添加样式 ===> 动态添加样式
             key.classList.add('playing'); 
             // 音频播放
+            audio.currentTime = 0;//播放前重置
             audio.play()
-            audio.currentTime = 0;
         }
 
         const keys = Array.from(document.querySelectorAll('.key')); // 获取页面所有按钮元素
