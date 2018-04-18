@@ -9,11 +9,23 @@
   <script>
     // ## Array Cardio Day 2
 
-    const people = [
-      { name: 'Wes', year: 1988 },
+		const people = [
+     	{ name: 'Wes', year: 1988 },
       { name: 'Kait', year: 1986 },
       { name: 'Irv', year: 1970 },
-      { name: 'Lux', year: 2015 },
+      { name: 'Lux', year: 2015 }
+    ];
+		
+
+    const people2 = [
+      [{ name: 'Wes', year: 1988 },
+      { name: 'Kait', year: 1986 },
+      { name: 'Irv', year: 1970 },
+      { name: 'Lux', year: 2015 }],
+      [{ name: 'Wes', year: 1988 },
+      { name: 'Kait', year: 1986 },
+      { name: 'Irv', year: 1970 },
+      { name: 'Lux', year: 2015 }]
     ];
 
     const comments = [
@@ -39,7 +51,13 @@
     // Array.prototype.every() // is everyone 19?
 
     const allAdults = people.every(person => ((new Date()).getFullYear()) - person.year >= 19);
+    console.log('all')
     console.log({allAdults});
+    
+    
+
+    
+    
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
