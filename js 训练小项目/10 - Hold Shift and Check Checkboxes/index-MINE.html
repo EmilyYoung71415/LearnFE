@@ -1,106 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Shift 多选</title>
+    <meta charset="UTF-8">
+    <title>Shift 多选</title>
 </head>
+
 <body>
-  <style>
+    <style>
+        html {
+            font-family: sans-serif;
+            background: #ffc600;
+        }
 
-    html {
-      font-family: sans-serif;
-      background:#ffc600;
-    }
+        .inbox {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+        }
 
-    .inbox {
-      max-width:400px;
-      margin:50px auto;
-      background:white;
-      border-radius:5px;
-      box-shadow:10px 10px 0 rgba(0,0,0,0.1);
-    }
+        .item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #F1F1F1;
+        }
 
-    .item {
-      display:flex;
-      align-items:center;
-      border-bottom: 1px solid #F1F1F1;
-    }
-
-    .item:last-child {
-      border-bottom:0;
-    }
-
-
-    input:checked + p {
-      background:#F9F9F9;
-      text-decoration: line-through;
-    }
-
-    input[type="checkbox"] {
-      margin:20px;
-    }
-
-    p {
-      margin:0;
-      padding:20px;
-      transition:background 0.2s;
-      flex:1;
-      font-family:'Microsoft Yahei', 'helvetica neue';
-      font-size: 20px;
-      font-weight: 200;
-      border-left: 1px solid #D1E2FF;
-    }
-
-    .details {
-      text-align: center;
-      font-size: 15px;
-    }
+        .item:last-child {
+            border-bottom: 0;
+        }
 
 
-  </style>
+        input:checked+p {
+            background: #F9F9F9;
+            text-decoration: line-through;
+        }
 
-  <div class="inbox">
-    <div class="item">
-      <input type="checkbox">
-      <p>这是一个邮件收件箱</p>
+        input[type="checkbox"] {
+            margin: 20px;
+        }
+
+        p {
+            margin: 0;
+            padding: 20px;
+            transition: background 0.2s;
+            flex: 1;
+            font-family: 'Microsoft Yahei', 'helvetica neue';
+            font-size: 20px;
+            font-weight: 200;
+            border-left: 1px solid #D1E2FF;
+        }
+
+        .details {
+            text-align: center;
+            font-size: 15px;
+        }
+    </style>
+
+    <div class="inbox">
+        <div class="item">
+            <input type="checkbox">
+            <p>这是一个邮件收件箱</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>选中一项</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>然后按住 Shift 键</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>选择另外一项</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>它们之间的都会被选中</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>试着实现这个功能</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>只用原生 JS </p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Good Luck!</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>记得展示你的成果♪(^∇^*)</p>
+        </div>
     </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>选中一项</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>然后按住 Shift 键</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>选择另外一项</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>它们之间的都会被选中</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>试着实现这个功能</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>只用原生 JS </p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>Good Luck!</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>记得展示你的成果♪(^∇^*)</p>
-    </div>
-  </div>
 
-<script>
-	const boxs = document.querySelectorAll('.inbox input[type="checkbox"]');
-\
-</script>
+    <script>
+        const boxs = document.querySelectorAll('.inbox input[type="checkbox"]');
+        boxs.forEach(box => box.addEventListener('click', handleCheck));
+        let 
+            firstCheck = null,
+            multiStatus = true;// 多选状态与第一个按钮状态一致
+        /*
+            点击两次，记录两次的索引，再按图索骥将两个input置为选中
+        */
+        // 第一次选中的和最后一次选中的
+        function handleCheck(e){
+            // 如果未被选中则第一个选中的按钮是它
+            // 当存在一个第一个选中值，且又按下了shift键则证明开启了连续模式 
+            // 连续模式也有可能是 取消选中。取消选中或是确认为选中状态决定于第一个按钮的状态。
+            // 第一个按钮当前值的最新状态代表了之后的连续状态
+            if(!firstCheck) firstCheck = this;
+            multiStatus = firstCheck.checked?true:false;
+            if(e.shiftKey){
+                // 获得两个选择区间
+                const boxArr = Array.from(boxs);
+                let indexStart = boxArr.indexOf(firstCheck);
+                let indexEnd = boxArr.indexOf(this);
+
+                // 取得boxArr中这两个区间的值，将其按钮状态置为与第一个状态一致
+                boxArr.slice(Math.min(indexStart, indexEnd), Math.max(indexStart, indexEnd) + 1)
+                    .forEach(input=>input.checked = multiStatus);
+            }
+
+            // 每次改变之后 更新fisrtCheck 因为随时变化
+            firstCheck  = this;
+        }
+
+    </script>
 </body>
+
 </html>
