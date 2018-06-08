@@ -6,12 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/style_1.css">
-    <!-- <link rel="stylesheet" href="./css/style_2.css"> -->
-    <!-- <link rel="stylesheet" href="./css/style_3.css"> -->
+    <style>
+        *{margin: 0;padding: 0;}
+        .buttons h2{
+            display: inline;
+        }
+        .buttons span{
+            display: inline-block;
+            width: 100px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            color: #000000;
+            border: 1px solid #d87093;
+            cursor: pointer;
+        }
+        .buttons span.active{
+            color: #fff;
+            background: #800080;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="resume1.css"> -->
+    <!-- <link rel="stylesheet" href="resume2.css"> -->
+    <!-- <link rel="stylesheet" href="resume3.css"> -->
 </head>
-
 <body>
+    <!--切换选项-->
+    <div class="buttons">
+        <h2>选择展示的简历样式：</h2>
+        <span class="active">resume1</span>
+        <span>resume2</span>
+        <span>resume3</span>
+    </div>
+    <br><hr>
+    <!--以下为正文-->
     <h1 class="title">简历</h1>
     <div class="content">
         <section class="basicInfo">
@@ -37,11 +65,11 @@
             </div>
             <div class="item">
                 <span class="name">Email</span>
-                <a href="/" class="content">joinefe@baidu.com</a>
+                <a href="#" class="content">joinefe@baidu.com</a>
             </div>
             <div class="item">
                 <span class="name">个人主页</span>
-                <a href="/" class="content">Gihub</a>
+                <a href="#" class="content">Gihub</a>
             </div>
         </section>
         <section class="skills">
@@ -78,6 +106,36 @@
             </div>
         </section>
     </div>
+    <script>
+        // 手动切换css
+        const buttons = document.querySelectorAll('.buttons span');
+        const head = document.getElementsByTagName('head')[0];
+        for(let i=0;i<buttons.length;i++){
+            buttons[i].onclick = function(){
+                //清除默认样式
+                for(let j=0;j<buttons.length;j++){
+                    buttons[j].classList.remove('active');
+                }
+                this.classList.toggle('active');
+
+               dynamicLoadCss(`${this.innerHTML}.css`);
+            }
+        }
+        
+        function dynamicLoadCss(url) {
+            const oldlink = document.getElementsByTagName('link')[0];
+            const newlink = document.createElement('link');
+            newlink.type='text/css';
+            newlink.rel = 'stylesheet';
+            newlink.href = url;
+            if(oldlink){
+                head.replaceChild(newlink,oldlink);
+            }else{
+                head.appendChild(newlink);
+            }
+        }
+
+    </script>
 </body>
 
 </html>
