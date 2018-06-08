@@ -1,0 +1,41 @@
+*{margin: 0;padding: 0;}
+body{
+    height:100%;
+}
+.title{
+    float: left;
+    width:10%;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    padding: 30px 0;
+    margin-right: 10px;
+    color: #fff;
+    background: #65a5fa;
+}
+.title::after{
+    content: "";
+    display: block;
+    clear: both;
+    overflow: hidden;
+}
+
+section{
+    overflow: hidden;
+}
+
+section h2{
+    margin: 20px 0;
+}
+section .item{
+    margin-right: 20px;
+    margin-top:10px; 
+}
+
+section .item .name{
+    font-weight:bold; 
+}
+
+.basicInfo .item,.contact .item{
+    float: left;
+} 
