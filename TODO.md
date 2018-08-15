@@ -48,6 +48,7 @@
 仿内置功能
 + call、apply、bind、create
 + new
++ 手写stringify
 + settimeout
     + 自己实现settimeout
     + 模仿setInterval
@@ -57,6 +58,7 @@
 + promise
 + reduce
 + assign
++ Map
 
 仿jq
 + 链式调用
