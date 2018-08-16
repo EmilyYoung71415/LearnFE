@@ -39,11 +39,11 @@
     emit(name,/*content*/){
         // 将name事件的所有订阅者都取出来 一一执行
         let handlers = this.eventObj[name];
-        let args = Array.prototype.slice.call(arguments,1);//类数组转数组
+        let args = [].slice.call(arguments,1);//类数组转数组
         if(handlers){
             for(let i=0,len = handlers.length;i<len;i++){
                 // 依次执行handler  并将参数传给handler
-                handlers[i].apply(handlers[i],args);
+                handlers[i].apply(this,args);
             }
         }
     }
@@ -72,3 +72,25 @@ blog.on('hehe',reader2);
 blog.on('haha',reader2);
 blog.emit('haha','haha播报第一期','附送一篇牛奶');
 blog.emit('hehe','hehe播报第一期')
+
+
+/**
+ * 
+ * 迭代优化
+ *  1、添加绑定事件 on
+ *  2、添加绑定一次性事件 once
+ *  3、移除事件监听 off
+ *     触发事件 emit
+ * 
+ *     1、需要一个事件类，创建不同名称的事件；
+ *         事件内部维护： 当事件被触发时，应该对应的函数处理
+ *     2、一些约束：
+ *         事件宿主对象 绑定的事件：
+ *         2.1、只能有一个，即对象绑定一个类型的事件
+ *         2.2、处理函数有多个。
+ *         2.3、对于同一个事件，重复绑定不同的事件处理是无效的；
+ * http://www.zoucz.com/blog/2016/07/01/czevent/
+ * https://github.com/mqyqingfeng/EventEmitter/blob/master/eventEmitter.js
+ * https://github.com/Olical/EventEmitter/blob/master/EventEmitter.js\
+ * https://github.com/jerryOnlyZRJ/mobile-events/blob/master/docs/user/docs(zh).md
+ */
