@@ -1,0 +1,48 @@
+<!-- 
+ * author: SunShinewyf
+ * date: 2018-07-16
+ * desc: 例子
+  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>bi-directional-binding example</title>
+    <script src="../src/dep.js"></script>
+    <script src="../src/watcher.js"></script>
+    <script src="../src/observer.js"></script>
+    <script src="../src/compile.js"></script>
+    <script src="../src/mvvm.js"></script>
+    <link type="text/css" rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="app">
+        <input type="input" v-model="message.a.b" />
+        <p class="abc" v-class="className">按钮</p>
+        <div>{{message.a.b}}</div>
+        {{message.a.b}} {{more}}
+        <p v-html="htmlStr"></p>
+        <button v-on:click="clickBtn">change model</button>
+    </div>
+</body>
+<script>
+    let vm = new MVVM({
+        el: '#app',
+        data: {
+            message: { a: { b: 'hello world' } },
+            className: 'btn',
+            more: 'mvvm',
+            htmlStr: '<span style="color: #f00;">red</span>',
+        },
+        method: {
+            clickBtn: function (e) {
+                let strArr = ['one', 'two', 'three'];
+                this.message.a.b = strArr[parseInt(Math.random() * 3)]
+            }
+        }
+    })
+</script>
+
+</html>
