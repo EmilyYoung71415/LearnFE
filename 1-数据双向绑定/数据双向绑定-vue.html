@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="name">
+        <div v-text="name"></div>
+        <div v-text="name"></div>
+    </div>
+    <script src="./数据双向绑定-vue.js"></script>
+    <script>
+        // 模拟一个简单的MVVM
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                name:""
+            }
+        });
+    </script>
+</body>
+</html>
