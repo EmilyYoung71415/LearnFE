@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript">
+        const canvas = document.getElementById('canvas');
+        canvas.width = 800;
+        canvas.height = 600;
+        /** @type {CanvasRenderingContext2D} */
+        var context = canvas.getContext("2d");
+        context.fillStyle = "#FFF";//画布背景
+        context.fillRect(0,0,800,600);
+        //矩形1 未发生过移动的
+        context.fillStyle = "black";
+        context.fillRect(100,100,200,100);
+
+        // 生成矩形2，以坐标系原点为参照，移动到 100，100
+        context.save();
+        context.fillStyle = "pink";
+        context.translate(100,100);// 但是要先将画笔移动
+        context.fillRect(100,100,200,100);//生成一个和矩形1位置大小一样的矩形
+        context.restore();
+
+        // 矩形3
+        context.save();
+        context.fillStyle = "yellow";
+        context.translate(200,200);// 相对于坐标系原点 移动 200,200
+        context.fillRect(100,100,200,100);
+        context.restore();
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>棋盘界面</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas");
+        canvas.width = 800;
+        canvas.height = 600;
+        /** @type {CanvasRenderingContext2D} */
+        let context = canvas.getContext("2d");
+        // 一个白色矩形 作为背景图
+        context.fillStyle = "#FFF";
+        context.fillRect(0,0,800,600);
+        // 大棋盘背景
+        drawRoundRect(context, 200, 100, 400, 400, 5);
+        context.fillStyle = "pink";
+        context.strokeStyle = "black";
+        context.lineWidth = 8;
+        context.stroke();
+        context.fill();
+        
+        // 在大棋盘内 生成一个个小矩形
+        for(let i = 1; i <= 4; i++){
+            for(let j = 1; j <= 4; j++){
+                // 间距是16 矩形长宽度是80
+                // 边长为400的矩形里，放边长为x的棋子4个，长度为y的5个空隙。4x+5y=400
+                // x,y均为整数。
+                // ==》 更高效的算法: 400/5 = 80，拿一个边长作为空隙长度之和 80/5
+                drawRoundRect(context, 200 + 16 * i + 80 * (i - 1), 100 + 16 * j + 80 * (j - 1), 80, 80, 5);
+                context.fillStyle = "#FFF";
+                context.strokeStyle = "black";
+                context.stroke();
+                context.fill();
+            }
+        }
+
+        function drawRoundRect(cxt, x, y, width, height, radius){
+            cxt.beginPath();
+            context.lineWidth = 4;
+            cxt.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 3 / 2);
+            cxt.lineTo(width - radius + x, y);
+            cxt.arc(width - radius + x, radius + y, radius, Math.PI * 3 / 2, Math.PI * 2);
+            cxt.lineTo(width + x, height + y - radius);
+            cxt.arc(width - radius + x, height - radius + y, radius, 0, Math.PI * 1 / 2);
+            cxt.lineTo(radius + x, height +y);
+            cxt.arc(radius + x, height - radius + y, radius, Math.PI * 1 / 2, Math.PI);
+            cxt.closePath();
+        }
+    </script>
+</body>
+</html>
