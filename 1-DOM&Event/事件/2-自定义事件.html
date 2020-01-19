@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" value="" oninput="changeInput(this.value)">
+    <p class="p"></p>
+    <script>
+        const oInput = document.querySelector('input');
+        const oP = document.querySelector('.p');
+        function changeInput(val){
+            let event = new CustomEvent('onEdit',{
+                'detail':{
+                    inputText:val
+                },
+                bubbles:true
+            })
+            oInput.dispatchEvent(event)
+            oP.innerHTML = val;
+        }
+        window.addEventListener('onEdit',e=>{
+            console.log(e.detail)
+        })
+    </script>
+</body>
+</html>
