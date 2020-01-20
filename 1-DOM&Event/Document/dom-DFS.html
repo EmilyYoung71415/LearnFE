@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <section class="header">
+            <div class="logo"></div>
+        </section>
+        <section class="main">
+            <div class="sidebar">
+                <ul class="menu">
+                    <li class='li'>
+                        <!-- 目标节点 -->
+                        <a href="" id='demo'>li1-a</a>
+                    </li>
+                    <li class='li'>
+                        <a href="">li2</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="footer">
+            <div class="copyright"></div>
+        </section>
+    </div>
+    <script>
+        const root = document.querySelector('.wrapper');
+        DFS(root);
+        // 深度优先 递归实现
+        function DFS(node){
+            let visited = new Map();
+            DFSCall(node);
+            console.log(visited);
+            function DFSCall(node){
+                visited.set(node,1); // set 自带去重功能
+                for(let next_nodes of node.children) {
+                    DFSCall(next_nodes);
+                }
+            }
+        }
+
+        // 深度优先 非递归实现
+        function DFS2(root){
+            if(!root) return [];
+            let visited = new Map(),
+                stack = [root];
+            console.log(visited)
+            while(stack.length){
+                let node = stack.pop()
+                visited.set(node,1);
+                // process(node);
+                // nodes =  generate_related_nodes(node);
+                let nodes = node.children;
+                stack.push(...nodes);
+            }
+        }
+    </script>
+</body>
+</html>
