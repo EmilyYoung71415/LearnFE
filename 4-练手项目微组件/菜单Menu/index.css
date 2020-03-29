@@ -1,0 +1,56 @@
+div.menuwrapper ul {
+    position: relative;
+    float: left;
+}
+/* 一级菜单 */
+div.menuwrapper ul li {
+    position: relative;
+    float: left;
+}
+
+/* 二级菜单 */
+div.menuwrapper ul ul {
+    display: none;
+    position: absolute;
+    top:100%;
+    left:0;
+}
+
+div.menuwrapper ul ul li {
+    min-width: 60px;
+    border:1px solid lightcoral;
+}
+
+/* 三级及以后 */
+div.menuwrapper ul ul ul{
+    position: absolute;
+    left:100%;
+    top:0;
+}
+
+div.menuwrapper ul li:hover > ul {
+    display: block;
+}
+
+/* 交互美化 */
+/* reset and beautify */
+div.menuwrapper * {
+    margin: 0;
+    padding: 0;
+}
+ul, li {
+    list-style:none;
+}
+a {
+    text-decoration: none;
+    padding:0 5px;
+}
+
+/* ul 下面的 每个 li 菜单子项都有 */
+div.menuwrapper ul li:hover {
+    background:lightblue;
+}
+
+div.menuwrapper ul li {
+    border:1px solid lightcoral;
+}
