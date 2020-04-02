@@ -1,4 +1,5 @@
 // 输出目录结构， 目录深度最高10层， 输出可折叠的效果， 样式不限制。
+// 题目来源：https://github.com/SlashLabTeam/2021questions/issues/11
 const arr = [{
     "path": "src/assets/example.xlsx"
 },{
@@ -105,8 +106,8 @@ function path2tree1(arr) {
 // path 从 根到叶子
 // 根到叶子之前 的每一步 都是 
 // 向下迭代 也是依赖于 currentCache = currentCache[current];
-console.log(path2tree(arr));
-function path2tree(arr) {
+// console.log(path2tree2(arr));
+function path2tree2(arr) {
     const tree = {};
     arr.map(o => o.path).forEach(p => buildTree(p));
     return tree;
@@ -128,3 +129,95 @@ function path2tree(arr) {
         curObj[leafname] = 1;
     }
 }
+
+// ===============================
+// 根据tree生成一个dom树 并且可以响应的
+// ===============================
+// way1的数据结构生成dom 并响应
+// <div class="treeview-wrapper">
+//     <ul class="tree">
+//         <li class="tree-item">
+//             <input type="checkbox" checked id="0" hidden/>
+//             <label for="0" class="tree-item-icon"><span class="tree-item-title">0</span></label>
+//             <ul>
+//                 <li class="tree-item">
+//                     <input type="checkbox" checked id="00" hidden/>
+//                     <label for="00" class="tree-item-icon"><span class="tree-item-title">00</span></label>
+//                     <ul>
+//                         <li class="tree-item"><span class="tree-item-title">000</span></li>
+//                         <li class="tree-item"><span class="tree-item-title">001</span></li>
+//                         <li class="tree-item"><span class="tree-item-title">002</span></li>
+//                     </ul>
+//                 </li>
+//             </ul>
+//         </li>
+//     </ul>
+// </div> 
+// render1(arr);
+function render(arr) {
+    const root = document.querySelector('.treeview-wrapper');
+    const treedata = path2tree1(arr);
+    const html = parseDOM(treedata);
+    root.innerHTML  = "<ul class='tree'>" + html + "</ul>";
+    function parseDOM(treeArr) {
+        let node = "";
+        treeArr.forEach(obj => {
+            const {title, children} = obj;
+            if (!children) {
+                node += `<li class="tree-item"><span class="tree-item-title">${title}</span></li>`;
+            }
+            else {
+                const nodeStr = [
+                    '<li class="tree-item">',
+                        `<input type="checkbox" id="${title}" hidden/>`,
+                        `<label for="${title}" class="tree-item-icon"><span class="tree-item-title">${title}</span></label>`,
+                        '<ul>',
+                            `${parseDOM(children)}`,
+                        '</ul>',
+                    '</li>'
+                ].join('');
+                node += nodeStr;
+            }
+        });
+        console.log(node);
+        return node;
+    }
+}
+
+render2(arr)
+// dom2
+function render2(arr) {
+    const root = document.querySelector('.treeview-wrapper');
+    const treedata = path2tree2(arr);
+    const html = parseDOM(treedata);
+    root.innerHTML  = "<ul class='tree'>" + html + "</ul>";
+    function parseDOM(obj) {
+        let node = "";
+        for (let key in obj) {
+            if (obj[key] === 1) {
+                node += `<li class="tree-item"><span class="tree-item-title">${key}</span></li>`;
+            }
+            else {
+                const nodeStr = [
+                    '<li class="tree-item">',
+                        `<input type="checkbox" id="${key}" hidden/>`,
+                        `<label for="${key}" class="tree-item-icon"><span class="tree-item-title">${key}</span></label>`,
+                        '<ul>',
+                            `${parseDOM(obj[key])}`,
+                        '</ul>',
+                    '</li>'
+                ].join('');
+                node += nodeStr;
+            }
+        }
+        return node;
+    }
+}
+
+
+/****
+ * 编码小技能：
+ *      node.children = [{},{}]
+ * 可以直接用 {key:{}}
+ * obj[key]  ==== node.children
+ */

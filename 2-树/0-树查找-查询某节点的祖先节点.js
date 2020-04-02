@@ -1,5 +1,6 @@
 // 找出树中某结点的祖先结点，比如输入zhonghuamen 返回jiangsu
 // 要求查出祖先链后函数立即返回，不再继续递归遍历后面的节点
+
 const options = [{
         id: 'zhejiang',
         text: 'Zhejiang',
@@ -25,6 +26,7 @@ const options = [{
         }]
     }
 ];
+
 // findRoot
 console.log(recursion(options, 'zhonghuamen'));
 function recursion(arr, target, res) {
