@@ -2,10 +2,19 @@
 const {Dep, pushTarget, popTarget} = require('./dep');
 
 class Watcher {
-    constructor(getter) {
+    constructor(getter, option = {}) {
+        const {computed} = option;
         this.value = null;
         this.getter = getter;
-        this.get();
+        this.computed = computed;
+        this.computedDep = null;
+
+        if (computed) {
+            this.computedDep = new Dep();
+        }
+        else {
+            this.get();
+        }
     }
     get() {
         pushTarget(this);
@@ -13,8 +22,19 @@ class Watcher {
         popTarget();
         return this.value;
     }
+    // computed使用
+    cDepend() {
+        // 计算watcher收集当前的渲染watcher为依赖
+        this.computedDep.depend();
+    }
     update() {
-        this.get();
+        if (this.computed) {
+            this.get();
+            this.computedDep.notify();
+        }
+        else {
+            this.get();
+        }
     }
 }
 

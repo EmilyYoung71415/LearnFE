@@ -17,6 +17,7 @@ function observerCall(data, key) {
 
     Object.defineProperty(data, key, {
         get() {
+            // data每个属性的dep 收集当前计算watcher作为依赖
             dep.depend();
             return val;
         },
