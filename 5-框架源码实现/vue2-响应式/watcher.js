@@ -3,12 +3,13 @@ const {Dep, pushTarget, popTarget} = require('./dep');
 
 class Watcher {
     constructor(getter, option = {}) {
-        const {computed} = option;
+        const {computed, watch, watchCallback} = option;
         this.value = null;
         this.getter = getter;
         this.computed = computed;
+        this.watch = watch;
         this.computedDep = null;
-
+        this.watchCallback = watchCallback;
         if (computed) {
             this.computedDep = new Dep();
         }
@@ -31,6 +32,11 @@ class Watcher {
         if (this.computed) {
             this.get();
             this.computedDep.notify();
+        }
+        else if (this.watch) {
+            const oldValue = this.value;
+            this.get();
+            this.watchCallback(oldValue, this.value);
         }
         else {
             this.get();
