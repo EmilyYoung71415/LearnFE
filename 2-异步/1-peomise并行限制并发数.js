@@ -22,19 +22,54 @@ function getData(dataArr, limit, promiseHandler) {
         console.log(`当前并发数:${count}`);
 
         return promiseHandler(_dataArr.shift())
-                .catch(err => console.error(err))
-                .then(() => {
-                    count--;
-                    console.log(`当前并发数:${count}`);
-                })
-                .then(() => loadAsync());
+            .catch(err => console.error(err))
+            .then(() => {
+                count--;
+                console.log(`当前并发数:${count}`);
+            })
+            .then(() => loadAsync());
     }
 }
 
-getData([1,2,3,4,5,6], 3, function (val) {
+getData([1, 2, 3, 4, 5, 6], 3, function (val) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(val);
         }, val * 1000);
     });
 });
+
+
+/**********
+ * 23行代码实现一个带并发数限制的fetch请求函数
+ * https://juejin.im/post/5c89d447f265da2dd37c604c
+ * 
+ * 实现如下函数 批量请求数据
+ */
+/***
+ * @param urls 请求地址数组
+ * @param callback 所有请求结束后的回调
+ * @param max 控制请求的并发数
+ */
+function handleFetchQueue(urls, max, callback) {
+    let count = 0;
+    request();
+    function request() {
+        count++;
+        console.log('start 当前并发数为: ' + count);
+        fetch(urls.shift())
+            .then(() => {
+                count--;
+                console.log('end 当前并发数为: ' + count);
+                if (urls.length) {
+                    request();
+                } else if (count === 0) {
+                    callback();
+                }
+            });
+        if (count < max) {
+            request();
+        }
+    }
+
+}
