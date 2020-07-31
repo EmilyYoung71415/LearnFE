@@ -1,9 +1,30 @@
-1、使用webpack完成简单工程化（web-excel
+· 使用webpack完成简单工程化（web-excel
     跨模块引用、配置loader、
     打包
 
-2、多页面配置（h5-mutil
+· 多页面配置（h5-mutil
     多页面
     独立编译
 
-3、基于webpack的跨模块引用
+· 基于webpack的跨模块引用
+
+========================================================
+基本工程化：
+    npm run dev: 读取了package.json 的文件
+        dev 对应脚本: 
+        "scripts": {
+            "dev": "webpack-dev-server --open --config webpack.dev.js",
+            "build": "webpack --config webpack.prod.js"
+        }
+        必备包: webpack, webpack-dev-server
+     webpack.dev.js：
+        主要是做了 
+            entry
+            plugins：HtmlWebpackPlugin 将生成的产物插入html里
+            output
+            module：配置针对什么文件做什么转换
+        mode变量： 设定当前是开发环境 dev 还是 生产环境 （生产环境会配置产物压缩 清理console等逻辑）
+========================================================
+给基本工程化加点料：
+    h5开发脚手架：学习资料 https://github.com/sunniejs/vue-h5-template
+    
