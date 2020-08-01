@@ -27,4 +27,15 @@
 ========================================================
 给基本工程化加点料：
     h5开发脚手架：学习资料 https://github.com/sunniejs/vue-h5-template
-    
+        配置多环境变量
+        rem适配方案
+        axios接口封装及接口管理
+        proxy跨域
+        externals引入 cdn资源
+        设置别名alias
+        生产去掉console
+        ie兼容
+        splitchunk
+        压缩图片
+        多页面打包 multi-page
+        静态资源自动打包上传到cdn
