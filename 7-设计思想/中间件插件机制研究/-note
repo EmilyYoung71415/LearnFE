@@ -33,6 +33,26 @@
 demo1、劫持console.log 做点啥 在每一个console.log前后做点啥
 demo2、如何捕获浏览器用户的所有行为？
 
+import Vue from 'vue'
+
+Vue.prototype.$emit = withHookBefore(Vue.prototype.$emit, (name, payload) => {
+  // 在此发挥黑魔法
+  console.log('emitting', name, payload)
+})
+
+function withHookBefore (originalFn, hookFn) {
+  return function () {
+    hookFn.apply(this, arguments)
+    return originalFn.apply(this, arguments)
+  }
+}
+
+
 基于对 console.log 的插桩，可以让我们实现跨屏的日志收集（比如在你的机器上实时查看其他设备的操作日志）
 基于对 DOM API 的插桩，可以让我们实现对业务无侵入的埋点，以及用户行为的录制与回放。
 基于对组件生命周期钩子的插桩，可以让我们实现更精确而无痛的性能收集与分析。
+
+
+
+
+

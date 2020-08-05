@@ -1,0 +1,12 @@
+// 在插件里使用 subscribeAction 方法 订阅得到每次action的变化 
+由捕获数据的变更得到插件的输入，而插件内部想要更改store的数据 需要遵守vuex数据流 通过commit方式更改 而不是直接更改state
+store.subscribeAction({
+    before: (action, state) => {
+        // action.type
+    },
+    after: (action, state) => {
+        // action.type
+    }
+});
+实现原理也是 将subscribeAction传入的函数 分论别类地放在不同的回调集合，
+分别在vuex内部的dispatch触发前后调用before、after回调
