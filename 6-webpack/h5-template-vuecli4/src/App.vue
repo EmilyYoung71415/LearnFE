@@ -1,15 +1,17 @@
 <template>
-  <div id="app">
-    <img class="logo" alt="Vue logo" src="./assets/logo.png">
-    <i class="icon logo"></i>
-  </div>
+    <div class="demo"></div>
 </template>
-
 <script>
-
+import axios from "axios";
 export default {
-  name: 'App',
-  components: {
-  }
+    data() {
+        return {
+
+        }
+    },
+    mounted() {
+        this.$http.get('/api/notice/get/unreadcount')
+                  .then(res => console.log(res));
+    }
 }
 </script>
