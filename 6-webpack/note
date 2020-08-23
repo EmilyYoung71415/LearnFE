@@ -90,4 +90,25 @@
       比如,VUE_APP_ENV = 'development' 通过process.env.VUE_APP_ENV 访问。
       除了 VUE_APP_* 变量之外，在你的应用代码中始终可用的还有两个特殊的变量NODE_ENV 和BASE_URL
       根据当前不同的打包环境，配置publicPath 文件引用的相对路径
-       
+
+3、deploy.js 部署
+    3.1 npm run build
+        通过配置 env.production.js的baseurl， 变量注入到 vue.config.js 里的publicpath 决定html文件的src引用
+    3.2 npm run deploy: 产物打包 并 将产物传到 机器上的
+4、多页面配置
+    多页面启动
+        vue.config.js 配置pages属性
+        /src/pages 下面维护单独的页面，有独立的入口文件、根vue、单独的index.html模板
+        字段分别在pages下可配置
+        npm run serve 后， 页面访问 localhost:8080/2019.html 即可跳转，而页面之间的跳转是原始的跳xxx.html
+
+        打包产物：
+            common-chunk.js,  page1.html+page1.js
+        构建速度： 加了pages属性很明显的感觉到 编译速度的下跌
+
+    多页面独立打包
+    多页面资源部署
+    多页面配置router
+5、优化
+    css：全局变量 函数，$cdn 设置
+    commonchunck：将vue、axios文件放在cdn上

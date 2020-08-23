@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script>
+      // 设置字体
+      (function (win,doc) {
+        if (!win.addEventListener) return;
+        var html = document.documentElement;
+        function setFont(){
+          var cliWidth = html.clientWidth;
+          // 414的宽度是iphone6/7/8plus的宽度
+          var ratio = cliWidth / 1242 / 3; // 设计稿是1242px 与网页真实宽度比例 (设计稿是按3倍大小设计的)
+          var basicSize = 77.63; // 把页面宽度看成 77.63rem 由设计稿的css rem 16px得出（当1rem=16px时页面宽度是77.63rem）
+          var fix = 1.625; // 校正参数: 设计稿的28.625 实际得是 17.65
+          html.style.fontSize = (basicSize * ratio / fix) + 'px';
+        }	
+        win.addEventListener('resize', setFont, false)
+        doc.addEventListener('DOMContentLoaded', setFont, false)
+      })(window, document);
+    </script>
+  </body>
+</html>
