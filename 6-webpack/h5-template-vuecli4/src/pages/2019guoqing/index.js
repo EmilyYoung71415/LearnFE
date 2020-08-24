@@ -1,6 +1,10 @@
+/****
+ * @file 入口
+ */
 import Vue from 'vue';
 import App from './App.vue';
-Vue.config.productionTip = false;
+// router
+
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+    render: h => h(App)
+}).$mount('#app');

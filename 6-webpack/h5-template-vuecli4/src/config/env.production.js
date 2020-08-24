@@ -3,8 +3,7 @@
  * @date: 2020-08-20
  */
 module.exports = {
-    // title: 'vue-h5-template',
-    baseUrl: 'https://www.xxx.com/h5-demo/', // 项目地址
-    baseApi: 'https://www.xxx.com/api', // 本地api请求地址,注意：如果你使用了代理，请设置成'/'
+    baseUrl: 'https://www.xxx.com/h5-demo', // xxx.com/m-activity/wighet/2019guoqing
+    baseApi: 'https://www.xxx.com/api', // xxx.com/ajax/singleactivity/2019guoqing
     // $cdn: 'https://xxx.cdn.cn'
 };
