@@ -6,7 +6,7 @@ const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV);
 
 module.exports = {
     publicPath: IS_PROD ? moduleSettings.baseUrl : './', // index.html里的静态资源src 前缀
-    outputDir: 'dist', //  生产环境构建文件的目录
+    outputDir: 'dist/' + CURRENT_MODULE, //  生产环境构建文件的目录
     indexPath: 'index.html',
     filenameHashing: true,
     productionSourceMap: false, // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
