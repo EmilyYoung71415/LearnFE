@@ -1,0 +1,25 @@
+1、CommonJS
+    引入：main.js:
+        var b = require('./b')
+        var c = require('./c')
+    导出 a.js:
+        exports.xxx = function(num) xxx
+        module.exports = xxx
+CommonJS 在浏览器内并不适用。因为 require() 的返回是同步的，
+意味着有多个依赖的话需要一个一个依次下载，堵塞了 js 脚本的执行。
+
+
+2、AMD：在CommonJS基础上定义而得
+    使用了异步回调的语法来并行下载多个依赖项
+引入：
+require(['./b', './c'], function(b, c) {
+    var n = b.square(2)
+    console.log(c)
+})
+
+导出：
+当前模块 依赖自d模块，处理后再导出
+define(['./d'], function(d) {
+  return d.PI
+})
+
