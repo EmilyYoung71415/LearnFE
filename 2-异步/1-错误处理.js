@@ -132,3 +132,87 @@ function main2() {
     .catch(err => console.log('my-err',err));
 }
 main2();
+
+
+
+function laterFunc(timeout) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, timeout);
+    });
+}
+function asyncWrong(num) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (num > 10) {
+                reject(new Error('something went wrong'));
+            } else {
+                resolve();
+            }
+        }, 1000);
+    });
+}
+/********************************
+ * .then第二个参数函数 捕获错误：
+ *      1、捕获本层以上的错误（不含本层)
+ *      2、捕获到错误后，下一层及以下的.then 还是会被执行
+ *      3、链末尾的.catch并不会被触发（错误视为已被捕获过一次了
+ */
+// demo1();
+function demo1() {
+    laterFunc(2000)
+        .then((result) => {
+            console.log('我进行到第一步的');
+            return asyncWrong(20) // 大于20 抛错
+        })
+        .then((result) => {
+            console.log('我进行到第二步的');
+        }, (_err) => {// 这里捕获到上一层的错误 但是1.下一层的.then还是会继续执行 2.末尾的.catch并不会执行
+            console.log('我出错啦，进到这里捕获错误，但是不经过catch了');
+        })
+        .then((result) => {// 
+            console.log('我还是继续执行的！！！！')
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+/**********
+ * .then(resolveFuc, rejectFunc)
+ * .catch
+ *      1、这俩捕获错误的优先级：谁写在链的更前面 那个错误就被谁捕获
+ *      2、这俩回调被执行时，都不会中断链，不是break,可以继续执行后续操作不受影响
+ *      3、.catch 不会中断，意味着.catch的位置放置顺序可以考量下
+ *         重要的程序中间一旦出现错误，会马上跳过其他后续程序的操作直接执行到最近的catch代码块，但不影响catch后续的操作！！！！
+ */
+// demo2();
+function demo2() {
+    laterFunc(2000)
+        .then((result) => {
+            console.log('我进行到第一步的');
+            return asyncWrong(20) // 大于20 抛错
+        })
+        .then((result) => {// 
+            console.log('我能执行吗') // 不能 因为上一个的promise reject了 决定当前层走的是.catch而不是.then
+        })
+        .catch((err) => {// 捕获到错误
+            console.log(err);
+        })
+        .then((result) => {
+            console.log('我进行到第二步的');
+        }, (_err) => {// 并不会执行，错误在上层就被catch捕获了
+            console.log('错误被.catch吃了 俺啥也没有');
+        })
+        .then((result) => {// 
+            console.log('我还是继续执行的！！！！')
+        })
+}
+/**********
+ * .then, .catch 回调都不是 break的，
+ * 那到底怎么才能跳出 或者 停止 promise链式呢
+ * ===> Promise有三种状态：pending，resolve，rejected
+ *      return new Promise(()=>{console.log('后续的不会执行')}) 
+ *      // 这里返回的一个新的Promise，没有resolve和reject，那么会一直处于pending状态，因为没返回啊，那么这种状态就一直保持着，中断了这个Promise
+ * 
+ */
