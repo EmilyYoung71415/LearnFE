@@ -8,52 +8,44 @@
  *      4、优化的点：
  *          1. 加个loading
  *          2. 实时更新上传文件的进度
- *          3. 上传完成后 输出访问链接
- *      思考：
- *          更好的抽象：重构一下 src/config, src/pages/[modulename]/config.js, deploy.js 三者的变量管理 尽量收敛一下
  */
-let fs = require('fs');
-let path = require('path');
-let request = require('request');
-// let log = require('log-util');
-// let chalk = require('chalk');
+const fs = require('fs');
+const path = require('path');
+const request = require('request');
 const readline = require('readline');
-const dir = require('node-dir'); // 匹配指定模式的文件 dir.readFiles
-
-
-let token = 'zzzz';
-
-const MACHINELIST =  {
-    token: token,
-    receiver: 'http://xxx/receiver.php',
-    staticPath: '/home/work/xxxx1',
-    odpPath: '/home/work/xxxx2'
-};
-
-/****
- * 上传打包出的
- *    dist: xxx.html => odpPath
- *    dist: 除了 xxhtml => staticPath
- */
-const curmodule = '2019guoqing';
+const dir = require('node-dir'); // 匹配指定模式的文件 dir.readFile
 const cwd = process.cwd();
-const absoluteUploadPath = path.resolve(cwd, 'dist/' + curmodule); // 绝对路径
-
+const CURRENT_MODULE = '2019guoqing';
+const CURRENT_ENV = 'otp';
+const BASE_SETTINGS = (require('./src/config/index.js') || {})[CURRENT_ENV];
+const absoluteUploadPath = path.resolve(cwd, 'dist/' + CURRENT_MODULE);
+// 拿到token
+let token = '';
+try {
+    token = (fs.readFileSync(path.resolve(process.env.HOME, './.iknow-token')) || '').toString();
+} catch (err) {
+}
 // 上传文件
 getUploadFiles(absoluteUploadPath)
 .then(files => {
+    const total = files.length - 1;
+    let index = 0;
     files.map(filePath => {
         const relativePath =  path.relative(absoluteUploadPath, filePath).replace(/[\\]/g, '/');
         upload(filePath, relativePath) // 模板页面的存储地址
             .then(res => {
-                console.log(res);
+                console.log('upload successful');
             })
             .catch(err => {
-                console.log(err);
+                // console.log('出错了');
+            })
+            .finally(() => {
+                if (index++ === total) {
+                    console.log(`🎉 🎉  upload complete 🎉 🎉: ${BASE_SETTINGS.accesslink}${CURRENT_MODULE}`);
+                }
             });
     });
 });
-
 function getUploadFiles(UploadDir, options) {
     function clearWrite(text) { // 读完了再一次性输出
         readline.clearLine(process.stdout, 0);
@@ -68,11 +60,11 @@ function getUploadFiles(UploadDir, options) {
             {
                 // match: /.tpl$/,
                 // exclude: /^\./
-                // exclude: /\.tpl$/
+                exclude: /\.map$/
             },
             function (err, content, next) {
                 if (err) throw err;
-                clearWrite(`共读取到 ${++total} 个文件\n`);
+                // clearWrite(`共读取到 ${++total} 个文件\n`);
                 next();
             },
             function (err, files) {
@@ -82,22 +74,20 @@ function getUploadFiles(UploadDir, options) {
         );
     });
 }
-
-
-function upload(readfilepath, filename, callback) {
+function upload(readfilepath, filename = '', callback) {
     // 根据filename判断 将资源推送到哪里
-    // .tpl 结尾 则推到 odppath
     let pushpath = '';
-    if (filename.test(/.tpl$/)) {
-        pushpath = MACHINELIST.odpPath + '/template/m-activity/page/' + curmodule + '/' + filename;
+    if (/.html$/.test(filename)) {
+        filename = filename.replace(/.html$/, '.tpl');
+        pushpath = BASE_SETTINGS.odpPath + '/template/m-activity/page/' + CURRENT_MODULE + '/' + filename;
     } else {
-        pushpath = MACHINELIST.staticPath + '/static/m-activity/pkg/' + curmodule + '/' + filename;
+        pushpath = BASE_SETTINGS.staticPath + '/static/m-activity/pkg/' + CURRENT_MODULE + '/' + filename;
     }
     return new Promise((resolve, reject) => {
         request.post({
-            url: MACHINELIST.receiver,
+            url: BASE_SETTINGS.receiver,
             formData: {
-                tk: MACHINELIST.token.trim(),
+                tk: token.trim(),
                 to: pushpath,
                 file: fs.createReadStream(readfilepath)
             }
