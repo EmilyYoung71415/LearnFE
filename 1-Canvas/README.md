@@ -1,5 +1,5 @@
 参考自：《《HTML5 Canvas核心技术图形动画与游戏开发》.((美)David Geary)》
-
+and：https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D
 
 <!-- 
     问题： 
