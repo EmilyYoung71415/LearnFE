@@ -87,7 +87,7 @@ function drawTextLine() {
    context.stroke();
 }
 
-function load1() {
+function load() {
     // textAlign、textBaseline 使用
     context.font = 'oblique normal bold 24px palatino';
 
@@ -109,9 +109,9 @@ function load1() {
 
 
 // 将文本居中
-function drawText(params) {
-    context.fillStyle = 'blue';
-    context.textAlign = 'center';
-    context.textBaseline = 'middle';
-    context.fillText(text, canvas.width/2, canvas.height/2);
-}
+// function drawText(params) {
+//     context.fillStyle = 'blue';
+//     context.textAlign = 'center';
+//     context.textBaseline = 'middle';
+//     context.fillText(text, canvas.width/2, canvas.height/2);
+// }
