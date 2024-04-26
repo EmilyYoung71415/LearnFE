@@ -1,0 +1,43 @@
+{
+  "name": "learn-fe",
+  "version": "1.0.0",
+  "description": "learn fe by test",
+  "packageManager": "pnpm@8.15.7",
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "pnpm -r run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmilyYoung71415/LearnFE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmilyYoung71415/LearnFE/issues"
+  },
+  "homepage": "https://github.com/EmilyYoung71415/LearnFE#readme",
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.15.0",
+    "@commitlint/cli": "^19.2.2",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@types/node": "^20.12.7",
+    "@vitest/coverage-v8": "^1.5.0",
+    "camelcase": "^8.0.0",
+    "changelogen": "^0.5.5",
+    "eslint": "^9.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10",
+    "vite-plugin-dts": "^3.8.3",
+    "vitest": "^1.5.0"
+  },
+  "dependencies": {
+    "@learn-fe/common": "workspace:^",
+    "node-blob": "^0.0.2"
+  }
+}
