@@ -1,0 +1,24 @@
+.navigation {
+  list-style: none;
+  margin: 0;
+  background: deepskyblue;
+}
+
+.navigation a {
+  padding: 1em;
+  color: white;
+  text-decoration: none;
+}
+
+.navigation a:hover {
+  background: #1565c0;
+}
+
+@media all and (max-width: 600px) {
+  .navigation a {
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}

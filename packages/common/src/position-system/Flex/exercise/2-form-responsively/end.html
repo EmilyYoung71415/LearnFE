@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      form {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      form > input {
+        flex: 1 1 50px;
+        margin: 0.5rem;
+      }
+
+      form > input[type="email"] {
+        flex: 3 1 150px;
+      }
+    </style>
+    <link rel="stylesheet" href="./end.css" />
+  </head>
+  <body>
+    <form>
+      <input type="text" placeholder="Name" />
+      <input type="email" placeholder="Email Address" />
+      <input type="submit" value="Subscribe" />
+    </form>
+  </body>
+</html>
