@@ -31,5 +31,8 @@
   },
   "lint-staged": {
     "*.ts": "pnpm run lint"
+  },
+  "dependencies": {
+    "rxjs": "^7.8.1"
   }
 }
