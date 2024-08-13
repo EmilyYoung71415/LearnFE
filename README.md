@@ -1,27 +1,23 @@
-# 说明
+# Table Of Content
 
-- JS API
-  - 数组方法
-    - 数组遍历
-    - 数组高级方法: flat, flatMap等
-  - 字符串方法: splice, slice
-  - 对象数组方法: Object.entries(obj), Object.values
-  - Map, Set, weakMap, weakSet
-  - 可选链操作符(?.)，空值合并运算符(??) 和 逻辑空赋值(??=)。
-  - this
-  - function方法 function property vs method
-  - proxy
+- [HTML + CSS + TailwindCSS](https://github.com/EmilyYoung71415/HTML-CSS-TailwindCSS)
 
-- Utils
-  - Lodash method
-  - moment
+- [JS Coding: from concepts to code application](https://github.com/EmilyYoung71415/JS-Coding)
 
-- Learn RxJS
+- [CDK UI: UI implementation for React and Vanilla JS](https://github.com/EmilyYoung71415/CDK-UI)
 
-- Learn NodeJS (文件操作等， 解析依赖 比如webpack)
-  - fs
-  - path
+- [System Design For FE](https://github.com/EmilyYoung71415/system-design-fe)
 
-- Learn 设计模式
+- [Common: Utils, Solutions, Common Abstraction](https://github.com/EmilyYoung71415/common-solutions)
 
-- Learn XState状态机
+## Comming
+
+- [ ] React Mastering
+
+- [ ] TS Mastering
+
+- [ ] NextJS Mastering
+
+- [ ] NodeJS Mastering
+
+- [ ] Side Projects

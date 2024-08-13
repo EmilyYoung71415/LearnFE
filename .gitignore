@@ -1,2 +1,8 @@
-node_modules
-.github
+/fe-system-design
+/js-coding
+/my-cdk-ui-lib
+/nodejs-mastering
+/react-mastering
+/typescript-mastering
+/common-utils
+.DS_Store
